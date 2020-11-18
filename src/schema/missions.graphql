@@ -1,5 +1,5 @@
 type Query {
-    missions: [Mission]
+  missions: [Mission]
 }
 
 type Mission {

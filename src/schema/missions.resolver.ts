@@ -2,7 +2,7 @@ import { Resolvers } from "../__generated__/graphql-server";
 
 export const resolvers: Resolvers = {
   Query: {
-    missions: async (_root, _args, { dataSources })  => {
+    missions: async (_root, _args, { dataSources }) => {
       const results = await dataSources.db.getMissions();
       return results.map(({ id, mission, launch_date_time }) => {
         return {

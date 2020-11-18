@@ -1,5 +1,5 @@
 query findAllMissions {
-    missions {
-        id
-    }
+  missions {
+    id
+  }
 }

@@ -7,7 +7,8 @@
     "start": "nodemon -r ts-node/register src/index.ts",
     "generate": "graphql-codegen --config codegen.yml",
     "prestart": "yarn generate",
-    "predev": "yarn generate"
+    "predev": "yarn generate",
+    "format": "prettier -w **/*.{ts,tsx,graphql,yml,json}"
   },
   "keywords": [],
   "author": "",
