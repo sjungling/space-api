@@ -2,3 +2,5 @@ node_modules
 .vscode
 *.log
 src/__generated__/
+.cache
+dist/

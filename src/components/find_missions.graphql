@@ -1,5 +1,20 @@
 query findAllMissions {
   missions {
     id
+    mission
+  }
+}
+
+# Write your query or mutation here
+query allMissionsAndAstronauts {
+  missions {
+    id
+    mission
+    launchDate
+    astronauts {
+      id
+      firstName
+      lastName
+    }
   }
 }
