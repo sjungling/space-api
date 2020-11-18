@@ -1,0 +1,58 @@
+id,mission,launch_date,launch_date_time,crew,launch_vehicle,cm_name,lm_name,duration,remarks
+2,Apollo 1,21 February 1967Launch Complex 34(planned),2/21/1967 0:00:00,"Gus Grissom
+Ed White
+Roger B. Chaffee","Saturn IB
+(AS-204)",N/A,N/A,N/A,"Never launched. On 27 January 1967, a fire in the command module during a launch pad test killed the crew and destroyed the module. This flight was originally designated AS-204, and was renamed to Apollo 1 at the request of the crew's families."
+3,Apollo 7,"11 October 196815:02 GMT
+Launch Complex 34",10/11/1968 15:02:00,"Wally Schirra
+Donn F. Eisele
+Walter Cunningham","Saturn IB
+(AS-205)",N/A,N/A,"10d 20h
+09m 03s",Test flight of Block II CSM in Earth orbit; included first live TV broadcast from American spacecraft.
+4,Apollo 8,"21 December 196812:51 GMT
+Launch Complex 39A",12/21/1968 12:51:00,"Frank Borman
+James Lovell
+William Anders",Saturn V(AS-503),N/A,N/A,06d 03h00m 42s,"First circumlunar flight of CSM, had ten lunar orbits in 20 hours. First crewed flight of Saturn V."
+5,Apollo 9,"3 March 196916:00 GMT
+Launch Complex 39A",03/03/1969 16:00,"James McDivitt
+David Scott
+Rusty Schweickart",Saturn V(AS-504),Gumdrop,Spider,10d 01h00m 54s,"First crewed flight test of Lunar Module; tested propulsion, rendezvous and docking. EVA tested the Portable Life Support System (PLSS)."
+6,Apollo 10,"18 May 196916:49 GMT
+Launch Complex 39B",5/18/1969 16:49:00,"Thomas P. Stafford
+John Young
+Eugene Cernan",Saturn V(AS-505),Charlie Brown,Snoopy,08d 00h03m 23s,"""Dress rehearsal"" for lunar landing. The LM descended to 8.4 nautical miles (15.6 km) from lunar surface."
+7,Apollo 11,"16 July 196913:32 GMT
+Launch Complex 39A",7/16/1968 13:31:00,"Neil Armstrong
+Michael Collins
+Edwin ""Buzz"" Aldrin",Saturn V(AS-506),Columbia,Eagle,"08d 03h
+18m 35s",First crewed landing in Sea of Tranquility; including a single surface EVA.
+8,Apollo 12,"14 November 196916:22 GMT
+Launch Complex 39A",11/14/1969 16:22:00,"Charles (Pete) Conrad
+Richard F. Gordon Jr.
+Alan Bean",Saturn V(AS-507),Yankee Clipper,Intrepid,"10d 04h
+36m 24s",First precise Moon landing in Ocean of Storms near Surveyor 3probe. Two surface EVAs and returned parts of Surveyor to Earth.
+9,Apollo 13,"11 April 197019:13 GMT
+Launch Complex 39A",4/11/1970 19:13:00,"James Lovell
+Jack Swigert
+Fred Haise",Saturn V(AS-508),Odyssey,Aquarius,"05d 22h
+54m 41s","Intended Fra Maurolanding cancelled after SM oxygen tank exploded. LM used as ""lifeboat"" for safe crew return. First S-IVB stage impact on Moon for active seismic test."
+10,Apollo 14,"31 January 197121:03 GMT
+Launch Complex 39A",1/31/1971 21:03:00,"Alan Shepard
+Stuart Roosa
+Edgar Mitchell",Saturn V(AS-509),Kitty Hawk,Antares,"09d 00h
+01m 58s",Successful Fra Maurolanding. Broadcast first color TV images from lunar surface. Conducted first materials science experiments in space. Conducted two surface EVAs.
+11,Apollo 15,"26 July 197113:34 GMT
+Launch Complex 39A",7/26/1971 13:34:00,"David Scott
+Alfred Worden
+James Irwin",Saturn V(AS-510),Endeavour,Falcon,"12d 07h
+11m 53s","Landing at Hadley–Apennine. First extended LM, three-day lunar stay. First use of Lunar Roving Vehicle. Conducted 3 lunar surface EVAs and one deep space EVA on return to retrieve orbital camera film from SM."
+12,Apollo 16,"16 April 197217:54 GMT
+Launch Complex 39A",4/16/1972 17:54:00,"John Young
+Ken Mattingly
+Charles Duke",Saturn V(AS-511),Casper,Orion,"11d 01h
+51m 05s",Landing in Descartes Highlands. Conducted 3 lunar EVAs and one deep space EVA.
+13,Apollo 17,"7 December 197205:33 GMT
+Launch Complex 39A",12/07/1972 5:33,"Eugene Cernan
+Ronald Evans
+Harrison Schmitt",Saturn V(AS-512),America,Challenger,"12d 13h
+51m 59s",Landing at Taurus–Littrow. First professional geologist on the Moon. First night launch. Conducted 3 lunar EVAs and one deep space EVA.
