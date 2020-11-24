@@ -4,3 +4,4 @@ node_modules
 src/__generated__/
 .cache
 dist/
+schema.graphql

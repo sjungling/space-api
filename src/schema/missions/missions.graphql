@@ -1,0 +1,23 @@
+type Query {
+  """
+  Fetch all Apollo space program missions
+  """
+  missions: [Mission]
+}
+
+type Mission {
+  id: ID!
+  """
+  Commonly associated with the name.
+
+  **Example:** `Apollo 11`
+  """
+  mission: String!
+  """
+  Launch Date of mission includeing UTC timestamp
+
+  **Example:** `10/11/1968 15:02:00`
+  """
+  launchDate: DateTime!
+  astronauts: [Astronaut]
+}

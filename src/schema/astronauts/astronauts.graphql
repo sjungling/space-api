@@ -1,0 +1,15 @@
+type Query {
+  """
+  Fetch all Astronauts from the Apollo space program
+  """
+  astronauts: [Astronaut]!
+}
+
+type Astronaut {
+  """
+  ID is an auto-incrementing value from data store
+  """
+  id: ID!
+  firstName: String!
+  lastName: String!
+}

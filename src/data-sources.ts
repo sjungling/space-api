@@ -26,6 +26,9 @@ class MyDatabase extends SQLDataSource {
         mission_id: mission_id,
       });
   }
+  getAstronauts() {
+    return this.knex.select("*").from("astronauts");
+  }
 }
 
 export const dataSources = () => ({
