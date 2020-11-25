@@ -4,7 +4,7 @@ import { DataSource } from "apollo-datasource";
 const knexConfig = {
   client: "sqlite3",
   connection: {
-    filename: "./src/apollo.db",
+    filename: "./src/apollo.sqlite3",
   },
   useNullAsDefault: false,
 };
@@ -20,14 +20,14 @@ class MyDatabase extends SQLDataSource {
   getAstronautsByMission(mission_id: Number) {
     return this.knex
       .select("*")
-      .from("astronauts")
-      .join("mission_crew", "astronauts.id", "=", "mission_crew.crew_id")
+      .from("crew")
+      .join("mission_crew", "crew.id", "=", "mission_crew.crew_id")
       .where({
         mission_id: mission_id,
       });
   }
   getAstronauts() {
-    return this.knex.select("*").from("astronauts");
+    return this.knex.select("*").from("crew");
   }
 }
 

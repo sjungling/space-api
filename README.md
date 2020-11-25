@@ -3,7 +3,7 @@
 This project is a chance to revisit front-end technologies and build a simple API for querying information about various space missions starting with the Apollo program.
 
 
-## Geetting Started
+## Getting Started
 ```shell
 yarn install
 yarn start
@@ -21,10 +21,9 @@ yarn start
 - Parcel
 - Yarn
 - TailWind 2
+- Knex
 
 TODO
 * Tailwinds 2
 * Confirm return types on query hooks
 * upgrade to TS 4.1
-* Break apart resolvers
-* Data Reloader script (csv -> sqlite3)

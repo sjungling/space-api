@@ -9,8 +9,10 @@
     "generate:graphql-types": "graphql-codegen --config codegen.yml",
     "generate:watch": "graphql-codegen --watch --config codegen.yml",
     "generate:schema": "ts-node src/typedefs.ts",
-    "prestart": "yarn generate",
-    "predev": "yarn generate",
+    "prestart": "yarn data:load generate",
+    "predev": "yarn data:load generate",
+    "postinstall": "yarn data:load",
+    "data:load": "knex seed:run",
     "format": "prettier -w **/*.{ts,tsx,graphql,yml,json}"
   },
   "keywords": [],
@@ -47,6 +49,8 @@
     "@types/node": "^14.14.7",
     "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.9",
+    "csv-parse": "^4.14.1",
+    "knex": "^0.21.12",
     "parcel-bundler": "^1.12.4"
   }
 }

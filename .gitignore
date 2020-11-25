@@ -5,3 +5,4 @@ src/__generated__/
 .cache
 dist/
 schema.graphql
+*.sqlite3
