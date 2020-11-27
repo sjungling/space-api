@@ -6,3 +6,4 @@ src/__generated__/
 dist/
 schema.graphql
 *.sqlite3
+graphql.schema.json

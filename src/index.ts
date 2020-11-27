@@ -1,6 +1,7 @@
 import { ApolloServer } from "apollo-server";
 import { Config as apolloServerConfig } from "apollo-server-express";
-import { typeDefs, resolvers } from "./typedefs";
+import { resolvers } from "./utilities/merge-resolvers";
+import { typeDefs } from "./utilities/merge-schema";
 import { dataSources } from "./data-sources";
 
 export const initializeServer = (): void => {
@@ -11,6 +12,7 @@ export const initializeServer = (): void => {
     typeDefs,
     resolvers,
     dataSources,
+    stopOnTerminationSignals: true,
   };
   const server = new ApolloServer(apolloServerConfig);
 

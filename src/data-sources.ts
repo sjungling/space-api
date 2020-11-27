@@ -1,10 +1,12 @@
 import { SQLDataSource } from "datasource-sql";
 import { DataSource } from "apollo-datasource";
+import { join } from "path";
 
+const databasePath = join(__dirname, "apollo.sqlite3");
 const knexConfig = {
   client: "sqlite3",
   connection: {
-    filename: "./src/apollo.sqlite3",
+    filename: databasePath,
   },
   useNullAsDefault: false,
 };
