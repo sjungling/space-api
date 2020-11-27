@@ -1,7 +1,7 @@
 {
-  "name": "apollo-missions",
-  "version": "1.0.0",
-  "description": "",
+  "name": "space-api",
+  "version": "0.1.0",
+  "description": "Apollo GraphQL Server for space data",
   "main": "src/index.js",
   "scripts": {
     "start": "ts-node -P tsconfig.json src/index.ts",
@@ -13,13 +13,17 @@
     "predev": "yarn data:load generate",
     "postinstall": "yarn data:load",
     "data:load": "knex seed:run",
-    "format": "prettier -w **/*.{ts,tsx,graphql,yml,json}"
+    "format": "prettier -w **/*.{ts,graphql,yml,json}",
+    "build": "yarn build:clean && yarn build:typescript && yarn sync:schema",
+    "build:clean": "rm -rf dist/*",
+    "build:typescript": "tsc -p tsconfig.json --outDir dist/",
+    "sync:schema": "node scripts/sync-gql.mjs",
+    "start:prod": "node --inspect dist/index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Scott Jungling",
   "license": "ISC",
   "dependencies": {
-    "@apollo/client": "^3.2.7",
     "apollo-datasource": "^0.7.2",
     "apollo-server": "^2.19.0",
     "body-parser": "^1.19.0",
@@ -29,8 +33,6 @@
     "graphql-tools": "^7.0.1",
     "nodemon": "^2.0.6",
     "prettier": "^2.1.2",
-    "react": "17.0.1",
-    "react-dom": "^17.0.1",
     "sqlite3": "^5.0.0",
     "typescript": "^4.0.5"
   },
@@ -42,15 +44,12 @@
     "@graphql-codegen/typescript-document-nodes": "1.17.8",
     "@graphql-codegen/typescript-graphql-files-modules": "1.18.0",
     "@graphql-codegen/typescript-operations": "1.17.10",
-    "@graphql-codegen/typescript-react-apollo": "2.1.1",
     "@graphql-codegen/typescript-resolvers": "^1.17.10",
     "@types/express": "^4.17.9",
     "@types/graphql": "^14.5.0",
     "@types/node": "^14.14.7",
-    "@types/react": "^16.9.56",
-    "@types/react-dom": "^16.9.9",
     "csv-parse": "^4.14.1",
-    "knex": "^0.21.12",
-    "parcel-bundler": "^1.12.4"
+    "globby": "^11.0.1",
+    "knex": "^0.21.12"
   }
 }

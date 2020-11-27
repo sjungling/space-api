@@ -7,11 +7,11 @@ import { writeFileSync } from "fs";
 const typesArray = loadFilesSync(path.join(__dirname, "schema"));
 const typeDefz = mergeTypeDefs(typesArray);
 const printedTypeDefs = print(typeDefz);
-writeFileSync("./schema.graphql", printedTypeDefs);
+writeFileSync(path.join(__dirname, "schema.graphql"), printedTypeDefs);
 
 const resolversArray = loadFilesSync(path.join(__dirname, "./schema"), {
-  extensions: ["ts"],
+  extensions: ["ts", "js"],
 });
 
-export const typeDefs = mergeTypeDefs(typesArray);
+export const typeDefs = typeDefz;
 export const resolvers = mergeResolvers(resolversArray);
