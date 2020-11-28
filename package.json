@@ -8,7 +8,7 @@
     "generate": "yarn generate:schema && yarn generate:graphql-types",
     "generate:graphql-types": "graphql-codegen --config codegen.yml",
     "generate:watch": "graphql-codegen --watch --config codegen.yml",
-    "generate:schema": "ts-node src/utilities/merge-schema.ts",
+    "generate:schema": "node scripts/generate-schema.mjs",
     "prestart": "yarn data:load && yarn generate",
     "predev": "yarn data:load && yarn generate",
     "postinstall": "yarn data:load",
