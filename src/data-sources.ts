@@ -14,6 +14,7 @@ const knexConfig = {
 class MyDatabase extends SQLDataSource {
   knex: any;
   constructor(config: any) {
+    console.info(`Loading data from ${databasePath}`);
     super(config);
   }
   getMissions() {
