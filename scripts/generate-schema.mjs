@@ -1,6 +1,6 @@
 import { loadFilesSync } from "@graphql-tools/load-files";
 import { mergeTypeDefs } from "@graphql-tools/merge";
-import { print } from "graphql";
+import graphql from "graphql";
 import { writeFileSync } from "fs";
 
 const loadPath = 'src/schema/**/*.graphql';
@@ -9,5 +9,5 @@ const schemaFiles = loadFilesSync(loadPath, {
   extensions: ["graphql"],
 });
 const mergedSchemaDoc = mergeTypeDefs(schemaFiles);
-const printedSchemaDoc = print(mergedSchemaDoc);
+const printedSchemaDoc = graphql.print(mergedSchemaDoc);
 writeFileSync("schema.graphql", printedSchemaDoc);
