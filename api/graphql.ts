@@ -3,8 +3,8 @@
 // Nextjs: ./pages/api/<endpoint-name>.{js|ts} or ./src/pages/api/<endpoint-name>.{js|ts}
 
 import { ApolloServer } from "@saeris/apollo-server-vercel";
-import {typeDefs} from '../utilities/merge-schema';
-import {resolvers} from '../utilities/merge-resolvers';
+import {typeDefs} from '../src/utilities/merge-schema';
+import {resolvers} from '../src/utilities/merge-resolvers';
 const server = new ApolloServer({
   typeDefs,
   resolvers,
