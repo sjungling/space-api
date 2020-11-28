@@ -26,6 +26,7 @@
   "author": "Scott Jungling",
   "license": "ISC",
   "dependencies": {
+    "@saeris/apollo-server-vercel": "^0.4.0",
     "apollo-datasource": "^0.7.2",
     "apollo-server": "^2.19.0",
     "body-parser": "^1.19.0",
