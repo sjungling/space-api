@@ -15,7 +15,7 @@
     "data:load": "knex seed:run",
     "data:load-prod": "NODE_ENV=production knex seed:run",
     "format": "prettier -l -w '**/*.{ts,graphql,yml,json}'",
-    "build": "yarn build:clean && yarn generate && yarn build:typescript && yarn sync:schema && yarn data:load-prod",
+    "build": "yarn build:clean && yarn generate && yarn build:typescript && yarn sync:schema && yarn data:load",
     "build:clean": "mkdir -p dist && rm -rf dist/*",
     "build:typescript": "tsc -p tsconfig.json --outDir dist/",
     "sync:schema": "node scripts/sync-gql.mjs",

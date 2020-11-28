@@ -5,9 +5,11 @@
 import { ApolloServer } from "@saeris/apollo-server-vercel";
 import {typeDefs} from '../src/utilities/merge-schema';
 import {resolvers} from '../src/utilities/merge-resolvers';
+import {dataSources} from '../src/data-sources';
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  dataSources,
   playground: true,
   introspection: true,
 });
