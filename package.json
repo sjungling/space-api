@@ -11,7 +11,6 @@
     "generate:schema": "ts-node scripts/generate-schema.ts",
     "prestart": "yarn data:load && yarn generate",
     "predev": "yarn data:load && yarn generate",
-    "postinstall": "yarn data:load",
     "data:load": "knex seed:run",
     "data:load-prod": "NODE_ENV=production knex seed:run",
     "format": "prettier -l -w '**/*.{ts,graphql,yml,json}'",
