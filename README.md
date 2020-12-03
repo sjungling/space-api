@@ -1,29 +1,19 @@
-# Space API
+# Custom Build Example
 
-This project is a chance to revisit front-end technologies and build a simple API for querying information about various space missions starting with the Apollo program.
+This directory is a brief example of using a Custom Build script that can be deployed with Vercel and zero configuration.
 
+## Deploy Your Own
 
-## Getting Started
+Deploy your own Custom Built project with Vercel.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/vercel/vercel/tree/master/examples/custom-build)
+
+_Live Example: https://custom-build.now-examples.now.sh_
+
+### How We Created This Example
+
+To get started deploying a Custom Built project with Vercel, you can use the [Vercel CLI](https://vercel.com/download) to initialize the project:
+
 ```shell
-yarn install
-yarn start
+$ vercel init custom-build
 ```
-
-
-## Technology
-- React 17
-- Apollo Client 3
-- Apollo Server
-- Express
-- Prettier
-- TypeScript
-- SQLite3
-- Parcel
-- Yarn
-- TailWind 2
-- Knex
-
-TODO
-* Tailwinds 2
-* Confirm return types on query hooks
-* upgrade to TS 4.1

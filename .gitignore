@@ -1,8 +1,13 @@
+.DS_Store
+.vercel
 node_modules
 .vscode
 *.log
-src/__generated__/
+**/generated/*
 .cache
+public/
 dist/
 schema.graphql
 *.sqlite3
+.cache
+api/types/

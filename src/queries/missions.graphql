@@ -1,0 +1,16 @@
+query findAllMissions {
+  missions {
+    id
+    mission
+    launchDate
+    commandModule
+    lunarModule
+    launchVehicle
+    notes
+    astronauts {
+      id
+      firstName
+      lastName
+    }
+  }
+}
