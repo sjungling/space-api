@@ -1,8 +1,10 @@
 {
   "scripts": {
+    "vercel-build": "yarn load:data && yarn generate:schema && yarn generate:types:server",
     "build": "rm -rf public/* && yarn load:data && yarn generate:types:client && parcel build src/index.html -d public --no-cache",
     "schema:push": "npx apollo service:push --graph=SpaceAPI-o3aoab --key=service:SpaceAPI-o3aoab:BWqcjtneYvYy8nMk_QrWJA --variant=current     --localSchemaFile=./schema.graphql",
     "generate:types": "graphql-codegen --config codegen-server.yml && graphql-codegen --config codegen-client.yml",
+    "generate:types:server": "graphql-codegen --config codegen-server.yml",
     "generate:schema": "ts-node scripts/generate-schema.ts",
     "generate:types:client": "yarn generate:schema && graphql-codegen --config codegen-client.yml",
     "format": "prettier -w '{api,src}/**/*.{ts,tsx,graphql,yml,json}'",
