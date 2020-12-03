@@ -8,6 +8,5 @@ node_modules
 public/
 dist/
 schema.graphql
-*.sqlite3
 .cache
 api/types/
