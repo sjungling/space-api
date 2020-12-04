@@ -7,15 +7,9 @@ import { SpaceRouter } from "./routes";
 
 const App: FunctionComponent = () => (
   <>
-    <header>
-      <h1>SpaceAPI</h1>
-    </header>
-    <main>
-      <ApolloProvider client={apolloClient}>
-        <SpaceRouter />
-      </ApolloProvider>
-    </main>
-    <footer>Made in California</footer>
+    <ApolloProvider client={apolloClient}>
+      <SpaceRouter />
+    </ApolloProvider>
   </>
 );
 

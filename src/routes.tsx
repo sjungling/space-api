@@ -1,16 +1,37 @@
 import React, { FunctionComponent, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Loading } from "./components/common/loading.component";
-const AboutPage = lazy(() => import("./pages/about.page"));
-const MissionsPage = lazy(() => import("./pages/missions.page"));
+import {
+  LoadingComponent,
+  HeaderComponent,
+  FooterComponent,
+} from "./components/common";
+import { ABOUT_PAGE_LINK, HOME_PAGE_LINK } from "./constants/routes";
+
+const routes = [
+  {
+    path: ABOUT_PAGE_LINK,
+    component: lazy(() => import("./pages/about.page")),
+  },
+  {
+    path: HOME_PAGE_LINK,
+    component: lazy(() => import("./pages/missions.page")),
+  },
+];
 
 export const SpaceRouter: FunctionComponent = () => (
-  <Router>
-    <Suspense fallback={<Loading />}>
-      <Switch>
-        <Route path="/about" component={AboutPage} />
-        <Route path="/" component={MissionsPage} />
-      </Switch>
-    </Suspense>
-  </Router>
+  <>
+    <Router>
+      <HeaderComponent />
+      <main>
+        <Suspense fallback={<LoadingComponent />}>
+          <Switch>
+            {routes.map((route) => (
+              <Route {...route} />
+            ))}
+          </Switch>
+        </Suspense>
+      </main>
+      <FooterComponent />
+    </Router>
+  </>
 );

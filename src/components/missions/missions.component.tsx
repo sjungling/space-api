@@ -5,7 +5,7 @@ import {
   Scalars,
 } from "../../generated/graphql";
 import { Astronauts } from "../astronauts/astronauts.component";
-import { Loading } from "../common/loading.component";
+import { LoadingComponent } from "../common/loading.component";
 
 type FormatDateOptions = {
   weekday?: "narrow" | "short" | "long";
@@ -111,8 +111,11 @@ export const Mission: FunctionComponent<TMission> = ({
 
 export const Missions: FunctionComponent = () => {
   const { data, loading, error } = useFindAllMissionsQuery();
-  if (error) return <h1>Error fetching</h1>;
-  if (loading) return <Loading />;
+  if (error) {
+    console.error(error);
+    return <h1>Error fetching</h1>;
+  }
+  if (loading) return <LoadingComponent />;
   const missionList = data.missions?.map((mission) => {
     return <Mission {...mission} />;
   });
