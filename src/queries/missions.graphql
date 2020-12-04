@@ -7,6 +7,7 @@ query findAllMissions {
     lunarModule
     launchVehicle
     notes
+    duration
     astronauts {
       id
       firstName

@@ -6,7 +6,7 @@ import {
 } from "../../generated/graphql";
 import { Astronauts } from "../astronauts/astronauts.component";
 import { LoadingComponent } from "../common/loading.component";
-
+import { convertSecondsToFormattedTime } from "../../utilities";
 type FormatDateOptions = {
   weekday?: "narrow" | "short" | "long";
   era?: "narrow" | "short" | "long";
@@ -65,7 +65,9 @@ export const Mission: FunctionComponent<TMission> = ({
   launchVehicle,
   lunarModule,
   notes,
+  duration,
 }) => {
+  const missionDuration = convertSecondsToFormattedTime(duration);
   const launchDateFormat: FormatDateOptions = {
     weekday: "long",
     year: "numeric",
@@ -87,11 +89,27 @@ export const Mission: FunctionComponent<TMission> = ({
     <div key={id} className="ring-2 p-1 dark:bg-opacity-25 dark:bg-indigo-600">
       <h2 className="text-center">{mission}</h2>
       <p>
-        Launched on:{" "}
+        {duration ? (
+          <span>Launched on: </span>
+        ) : (
+          <span>Planned to launch on: </span>
+        )}
         <time dateTime={formatISODate(launchDate)}>
           {formatLaunchDate(launchDate, launchDateFormat)} at{" "}
           {formatLaunchDate(launchDate, launchDateTimeFormat)}
         </time>
+        {duration && (
+          <p>
+            Duration:{" "}
+            {Object.keys(missionDuration).map((key) => {
+              return (
+                <span>
+                  {missionDuration[key]} {key}{" "}
+                </span>
+              );
+            })}
+          </p>
+        )}
       </p>
       <p>
         <MissionVehicles

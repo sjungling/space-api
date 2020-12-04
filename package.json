@@ -24,6 +24,7 @@
     "@graphql-codegen/typescript-react-apollo": "2.2.1",
     "@types/react": "^17.0.0",
     "@types/react-router-dom": "^5.1.6",
+    "apollo3-cache-persist": "^0.9.1",
     "autoprefixer": "^9",
     "graphql": "^15.4.0",
     "graphql-tools": "^7.0.2",
