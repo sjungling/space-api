@@ -1,7 +1,6 @@
 {
   "scripts": {
     "build": "yarn generate && rm -rf public/* && yarn build:webpack",
-    "build:parcel": "parcel build src/index.html -d parcel_public --no-cache",
     "build:webpack": "NODE_ENV=production npx webpack --config webpack.prod.js",
     "generate": "graphql-codegen --config codegen-client.yml",
     "format": "prettier -w 'src/**/*.{ts,tsx,graphql,yml,json}' '{webpack,postcss,tailwind,vercel}*.{js,json}'",
@@ -37,8 +36,6 @@
     "graphql": "^15.4.0",
     "graphql-tools": "^7.0.2",
     "html-webpack-plugin": "^4.5.0",
-    "parcel": "^1.12.4",
-    "parcel-plugin-bundle-visualiser": "^1.2.0",
     "postcss": "^8.1.4",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^13.0.0",
