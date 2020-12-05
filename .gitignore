@@ -10,3 +10,4 @@ dist/
 schema.graphql
 .cache
 api/types/
+stats.json

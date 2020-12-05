@@ -3,14 +3,15 @@
       "jsx": "react",
       "esModuleInterop": true,
       "allowSyntheticDefaultImports": true,
-      "module": "commonjs",
+      "module": "esnext",
       "target": "es2017",
       "lib": ["dom", "es2017"],
       "moduleResolution": "node",
       "resolveJsonModule": true,
       "noImplicitAny": false,
       "sourceMap": true,
-      "skipLibCheck": true
+      "skipLibCheck": true,
+      "outDir": "./public/"
     },
     "include": ["src"],
     "exclude": ["**/node_modules", "**/.*", "scripts/**"]
