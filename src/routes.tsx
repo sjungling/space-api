@@ -11,13 +11,19 @@ const routes = [
   {
     path: ABOUT_PAGE_LINK,
     component: lazy(
-      () => import(/* webpackPrefetch: true */ "./pages/about.page")
+      () =>
+        import(
+          /* webpackPrefetch: true, webpackChunkName: "about" */ "./pages/about.page"
+        )
     ),
   },
   {
     path: HOME_PAGE_LINK,
     component: lazy(
-      () => import(/* webpackPrefetch: true */ "./pages/missions.page")
+      () =>
+        import(
+          /* webpackPrefetch: true, webpackChunkName: "missions" */ "./pages/missions.page"
+        )
     ),
   },
 ];
