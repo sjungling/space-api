@@ -8,6 +8,8 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
 const CopyPlugin = require("copy-webpack-plugin");
 const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin")
+  .default;
 
 module.exports = {
   mode: "production",
@@ -39,6 +41,7 @@ module.exports = {
       template: "./src/index.html",
       scriptLoading: "defer",
     }),
+    new HTMLInlineCSSWebpackPlugin(),
     new webpack.DefinePlugin({
       GRAPHQL_URI: JSON.stringify(
         process.env.GRAPHQL_URI || "https://api.spaceapi.dev/api/graphql"
