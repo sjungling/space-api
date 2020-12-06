@@ -2,7 +2,8 @@ import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client/core";
 import { persistCache, LocalStorageWrapper } from "apollo3-cache-persist";
 import { isDevelopment } from "./utilities";
 
-const GRAPHQL_URI = process.env.GRAPHQL_URI || "/api/graphql";
+declare var GRAPHQL_URI: string;
+
 const link = new HttpLink({ uri: GRAPHQL_URI, useGETForQueries: true });
 const cache = new InMemoryCache();
 

@@ -1,12 +1,16 @@
 {
   "scripts": {
-    "build": "yarn generate && rm -rf public/* && parcel build src/index.html -d public --no-cache",
+    "build": "yarn generate && rm -rf public/* && yarn build:webpack",
+    "build:webpack": "NODE_ENV=production npx webpack --config webpack.prod.js",
     "generate": "graphql-codegen --config codegen-client.yml",
-    "format": "prettier -w '{api,src}/**/*.{ts,tsx,graphql,yml,json}'"
+    "format": "prettier -w 'src/**/*.{ts,tsx,graphql,yml,json}' '{webpack,postcss,tailwind,vercel}*.{js,json}'",
+    "webpack": "webpack",
+    "start": "npx webpack serve --config webpack.dev.js"
   },
   "name": "space-api",
   "version": "1.0.0",
   "license": "MIT",
+  "private": true,
   "browserslist": [
     "last 1 Chrome version"
   ],
@@ -26,20 +30,30 @@
     "@types/react-router-dom": "^5.1.6",
     "apollo3-cache-persist": "^0.9.1",
     "autoprefixer": "^9",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.3.2",
+    "css-loader": "^5.0.1",
     "graphql": "^15.4.0",
     "graphql-tools": "^7.0.2",
-    "parcel": "^1.12.4",
-    "parcel-plugin-bundle-visualiser": "^1.2.0",
+    "html-webpack-plugin": "^4.5.0",
     "postcss": "^8.1.4",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^13.0.0",
+    "postcss-loader": "^4.1.0",
     "preact": "^10.5.7",
     "preact-dom": "^1.0.1",
     "prettier": "^2.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
+    "style-loader": "^2.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "typescript": "^4.1.2"
+    "ts-loader": "^8.0.11",
+    "typescript": "^4.1.2",
+    "webpack": "^5.10.0",
+    "webpack-bundle-analyzer": "^4.2.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.4.0"
   }
 }
