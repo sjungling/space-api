@@ -10,11 +10,15 @@ import { ABOUT_PAGE_LINK, HOME_PAGE_LINK } from "./constants/routes";
 const routes = [
   {
     path: ABOUT_PAGE_LINK,
-    component: lazy(() => import("./pages/about.page")),
+    component: lazy(
+      () => import(/* webpackPrefetch: true */ "./pages/about.page")
+    ),
   },
   {
     path: HOME_PAGE_LINK,
-    component: lazy(() => import("./pages/missions.page")),
+    component: lazy(
+      () => import(/* webpackPrefetch: true */ "./pages/missions.page")
+    ),
   },
 ];
 
