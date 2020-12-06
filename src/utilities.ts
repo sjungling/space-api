@@ -9,8 +9,8 @@ export const convertSecondsToFormattedTime = (seconds) => {
   const minutes = Math.floor(seconds / 60);
   seconds -= minutes * 60;
   return {
-    days,
     hours,
+    days,
     minutes,
     seconds,
   };

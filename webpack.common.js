@@ -31,7 +31,17 @@ module.exports = {
   plugins: [
     new webpack.ProgressPlugin({}),
     new CleanWebpackPlugin(),
+
     new HtmlWebpackPlugin({ template: "./src/index.html" }),
+    new webpack.DefinePlugin({
+      GRAPHQL_URI: JSON.stringify(
+        process.env.GRAPHQL_URI || "https://api.spaceapi.dev/api/graphql"
+      ),
+      "process.env.NODE_ENV": JSON.stringify(
+        process.env.NODE_ENV || "development"
+      ),
+    }),
+
     new BundleAnalyzerPlugin({
       analyzerMode: "static",
       openAnalyzer: false,
