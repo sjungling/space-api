@@ -1,3 +1,9 @@
+fragment AstronautDetails on Astronaut {
+  id
+  firstName
+  lastName
+}
+
 query findAstronautById($astronaut_id: Int!) {
   astronaut(id: $astronaut_id) {
     ...AstronautDetails

@@ -9,12 +9,6 @@ fragment MissionDetails on Mission {
   duration
 }
 
-fragment AstronautDetails on Astronaut {
-  id
-  firstName
-  lastName
-}
-
 query findAllMissions {
   missions {
     ...MissionDetails

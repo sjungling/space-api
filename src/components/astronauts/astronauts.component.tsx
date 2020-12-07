@@ -28,3 +28,14 @@ export const Astronaut: FunctionComponent<TAstronaut> = ({
     </li>
   );
 };
+
+export const AstronautDetail: FunctionComponent<TAstronaut> = ({
+  firstName,
+  lastName,
+}) => (
+  <React.Fragment>
+    <h1>
+      {firstName} {lastName}
+    </h1>
+  </React.Fragment>
+);

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { useParams } from "react-router-dom";
-import { Astronaut } from "../components/astronauts/astronauts.component";
+import { AstronautDetail } from "../components/astronauts/astronauts.component";
 import { LoadingComponent } from "../components/common";
 import { NotFound, useFindAstronautByIdQuery } from "../generated/graphql";
 
@@ -24,7 +24,7 @@ const AstronautPage: FunctionComponent = () => {
   if (data && data.astronaut.__typename === "Astronaut") {
     return (
       <React.Fragment>
-        <Astronaut {...data.astronaut} />
+        <AstronautDetail {...data.astronaut} />
       </React.Fragment>
     );
   }
