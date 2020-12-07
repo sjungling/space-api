@@ -1,4 +1,6 @@
 import React, { FunctionComponent } from "react";
+import { Link } from "react-router-dom";
+import { CREATE_ASTRONAUT_DETAIL_LINK } from "../../constants/routes";
 import { Astronaut as TAstronaut } from "../../generated/graphql";
 
 export const Astronauts: FunctionComponent<{ crew: TAstronaut[] }> = ({
@@ -20,7 +22,9 @@ export const Astronaut: FunctionComponent<TAstronaut> = ({
 }) => {
   return (
     <li key={id}>
-      {lastName}, {firstName}
+      <Link to={CREATE_ASTRONAUT_DETAIL_LINK(id)}>
+        {lastName}, {firstName}
+      </Link>
     </li>
   );
 };

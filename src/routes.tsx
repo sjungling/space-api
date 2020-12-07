@@ -7,6 +7,7 @@ import {
 } from "./components/common";
 import {
   ABOUT_PAGE_LINK,
+  ASTRONAUT_DETAIL_LINK,
   HOME_PAGE_LINK,
   MISSION_DETAIL_LINK,
 } from "./constants/routes";
@@ -14,6 +15,7 @@ import {
 const routes = [
   {
     path: ABOUT_PAGE_LINK,
+    exact: true,
     component: lazy(
       () =>
         import(
@@ -23,10 +25,21 @@ const routes = [
   },
   {
     path: MISSION_DETAIL_LINK,
+    exact: false,
     component: lazy(
       () =>
         import(
           /* webpackPrefetch: true, webpackChunkName: "mission-details" */ "./pages/mission.page"
+        )
+    ),
+  },
+  {
+    path: ASTRONAUT_DETAIL_LINK,
+    exact: false,
+    component: lazy(
+      () =>
+        import(
+          /* webpackPrefetch: true, webpackChunkName: "astronaut-details" */ "./pages/astronaut.page"
         )
     ),
   },

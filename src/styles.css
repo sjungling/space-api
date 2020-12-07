@@ -15,7 +15,7 @@
     @apply text-lg;
   }
   a {
-    @apply text-blue-600 underline;
+    @apply text-blue-600 underline dark:text-white;
   }
   header {
     @apply text-gray-800 text-center dark:text-white;

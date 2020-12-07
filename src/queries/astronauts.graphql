@@ -1,0 +1,5 @@
+query findAstronautById($astronaut_id: Int!) {
+  astronaut(id: $astronaut_id) {
+    ...AstronautDetails
+  }
+}
