@@ -62,8 +62,8 @@ export const SpaceRouter: FunctionComponent = () => (
       <main>
         <Suspense fallback={<LoadingComponent />}>
           <Switch>
-            {routes.map((route) => (
-              <Route {...route} />
+            {routes.map((route, idx) => (
+              <Route key={idx} {...route} />
             ))}
           </Switch>
         </Suspense>

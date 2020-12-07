@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, MouseEvent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import {
   useFindAllMissionsQuery,
   Mission as TMission,
@@ -85,7 +85,7 @@ export const Mission: FunctionComponent<TMission> = ({
     timeZoneName: "long",
   };
   const [noteVisibility, setNoteVisibility] = useState(false);
-  const toggleNotes = (event: MouseEvent<HTMLButtonElement>) => {
+  const toggleNotes = () => {
     setNoteVisibility(!noteVisibility);
   };
 
@@ -109,7 +109,7 @@ export const Mission: FunctionComponent<TMission> = ({
             Duration:{" "}
             {Object.keys(missionDuration).map((key) => {
               return (
-                <span>
+                <span key={key}>
                   {missionDuration[key]} {key}{" "}
                 </span>
               );
@@ -177,7 +177,7 @@ export const Missions: FunctionComponent = () => {
   }
   if (loading) return <LoadingComponent />;
   const missionList = data.missions?.map((mission) => {
-    return <Mission {...mission} />;
+    return <Mission key={mission.id} {...mission} />;
   });
   return (
     <div className="grid grid-cols-1  gap-1 md:grid-cols-3 md:gap-4 lg:grid-cols-4">

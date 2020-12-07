@@ -8,6 +8,7 @@ export const Astronauts: FunctionComponent<{ crew: TAstronaut[] }> = ({
 }) => {
   const astronauts = crew.map((astronaut) => (
     <Astronaut
+      key={astronaut.id}
       id={astronaut.id}
       firstName={astronaut.firstName}
       lastName={astronaut.lastName}

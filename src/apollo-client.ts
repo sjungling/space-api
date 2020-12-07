@@ -1,13 +1,20 @@
-import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client/core";
+import {
+  ApolloClient,
+  HttpLink,
+  InMemoryCache,
+  NormalizedCacheObject,
+} from "@apollo/client/core";
 import { persistCache, LocalStorageWrapper } from "apollo3-cache-persist";
 import { isDevelopment } from "./utilities";
 
-declare var GRAPHQL_URI: string;
+declare let GRAPHQL_URI: string;
 
 const link = new HttpLink({ uri: GRAPHQL_URI, useGETForQueries: true });
 const cache = new InMemoryCache();
 
-export const createApolloClient = async () => {
+export const createApolloClient = async (): Promise<
+  ApolloClient<NormalizedCacheObject>
+> => {
   await persistCache({
     cache,
     storage: new LocalStorageWrapper(window.localStorage),

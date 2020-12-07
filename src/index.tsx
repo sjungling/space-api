@@ -4,8 +4,11 @@ import { ApolloProvider } from "@apollo/client/react";
 import "./styles.css";
 import { createApolloClient } from "./apollo-client";
 import { SpaceRouter } from "./routes";
+import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 
-const App: FunctionComponent<{ client: any }> = ({ client }) => (
+const App: FunctionComponent<{
+  client: ApolloClient<NormalizedCacheObject>;
+}> = ({ client }) => (
   <>
     <ApolloProvider client={client}>
       <SpaceRouter />

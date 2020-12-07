@@ -5,7 +5,7 @@ import { LoadingComponent } from "../components/common";
 import { Mission } from "../components/missions/missions.component";
 
 const MissionPage: FunctionComponent = () => {
-  let { mission_id } = useParams<{ mission_id: string }>();
+  const { mission_id } = useParams<{ mission_id: string }>();
   const { data, loading, error } = useFindMissionByIdQuery({
     variables: {
       mission_id: Number(mission_id),

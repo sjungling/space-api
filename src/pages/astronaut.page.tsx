@@ -5,7 +5,7 @@ import { LoadingComponent } from "../components/common";
 import { NotFound, useFindAstronautByIdQuery } from "../generated/graphql";
 
 const AstronautPage: FunctionComponent = () => {
-  let { astronaut_id } = useParams<{ astronaut_id: string }>();
+  const { astronaut_id } = useParams<{ astronaut_id: string }>();
 
   const { data, loading, error } = useFindAstronautByIdQuery({
     variables: {
