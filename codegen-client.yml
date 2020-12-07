@@ -1,5 +1,5 @@
 overwrite: true
-schema: "https://space-api-graphql.vercel.app/api/graphql"
+schema: "https://api.spaceapi.dev/api/graphql"
 documents: "src/**/*.graphql"
 generates:
   src/generated/graphql.tsx:

@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "build": "yarn generate && rm -rf public/* && yarn build:webpack",
-    "build:webpack": "NODE_ENV=production npx webpack --config webpack.prod.js",
+    "build": "yarn generate && rm -rf public/* && yarn build:webpack:dev",
+    "build:webpack": "webpack --config webpack.prod.js",
+    "build:webpack:dev": "webpack --config webpack.dev.js",
     "generate": "graphql-codegen --config codegen-client.yml",
     "format": "prettier -w 'src/**/*.{ts,tsx,graphql,yml,json}' '{webpack,postcss,tailwind,vercel}*.{js,json}'",
     "webpack": "webpack",
@@ -41,6 +42,7 @@
     "copy-webpack-plugin": "^6.3.2",
     "css-loader": "^5.0.1",
     "css-minimizer-webpack-plugin": "^1.1.5",
+    "cz-conventional-changelog": "3.3.0",
     "graphql": "^15.4.0",
     "graphql-tools": "^7.0.2",
     "html-inline-css-webpack-plugin": "^1.9.1",
@@ -67,5 +69,10 @@
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.4.0",
     "workbox-webpack-plugin": "^6.0.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

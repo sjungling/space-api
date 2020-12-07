@@ -41,6 +41,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       scriptLoading: "defer",
+      publicPath: "/",
     }),
     new HTMLInlineCSSWebpackPlugin(),
     new webpack.DefinePlugin({

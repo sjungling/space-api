@@ -1,17 +1,45 @@
+fragment MissionDetails on Mission {
+  id
+  mission
+  launchDate
+  commandModule
+  lunarModule
+  launchVehicle
+  notes
+  duration
+}
+
+fragment AstronautDetails on Astronaut {
+  id
+  firstName
+  lastName
+}
+
 query findAllMissions {
   missions {
-    id
-    mission
-    launchDate
-    commandModule
-    lunarModule
-    launchVehicle
-    notes
-    duration
+    ...MissionDetails
     astronauts {
-      id
-      firstName
-      lastName
+      ...AstronautDetails
+    }
+  }
+}
+
+query findMissionById($mission_id: Int!) {
+  mission(id: $mission_id) {
+    __typename
+    ... on Mission {
+      ...MissionDetails
+      media {
+        url
+        type
+        attribution
+      }
+      astronauts {
+        ...AstronautDetails
+      }
+    }
+    ... on NotFound {
+      message
     }
   }
 }

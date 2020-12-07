@@ -5,7 +5,11 @@ import {
   HeaderComponent,
   FooterComponent,
 } from "./components/common";
-import { ABOUT_PAGE_LINK, HOME_PAGE_LINK } from "./constants/routes";
+import {
+  ABOUT_PAGE_LINK,
+  HOME_PAGE_LINK,
+  MISSION_DETAIL_LINK,
+} from "./constants/routes";
 
 const routes = [
   {
@@ -18,7 +22,17 @@ const routes = [
     ),
   },
   {
+    path: MISSION_DETAIL_LINK,
+    component: lazy(
+      () =>
+        import(
+          /* webpackPrefetch: true, webpackChunkName: "mission-details" */ "./pages/mission.page"
+        )
+    ),
+  },
+  {
     path: HOME_PAGE_LINK,
+    exact: true,
     component: lazy(
       () =>
         import(

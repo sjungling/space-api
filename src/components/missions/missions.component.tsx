@@ -3,10 +3,13 @@ import {
   useFindAllMissionsQuery,
   Mission as TMission,
   Scalars,
+  Media as TMedia,
 } from "../../generated/graphql";
 import { Astronauts } from "../astronauts/astronauts.component";
 import { LoadingComponent } from "../common/loading.component";
 import { convertSecondsToFormattedTime } from "../../utilities";
+import { Link } from "react-router-dom";
+import { CREATE_MISSION_DETAIL_LINK } from "../../constants/routes";
 type FormatDateOptions = {
   weekday?: "narrow" | "short" | "long";
   era?: "narrow" | "short" | "long";
@@ -66,6 +69,7 @@ export const Mission: FunctionComponent<TMission> = ({
   lunarModule,
   notes,
   duration,
+  media,
 }) => {
   const missionDuration = convertSecondsToFormattedTime(duration);
   const launchDateFormat: FormatDateOptions = {
@@ -87,7 +91,11 @@ export const Mission: FunctionComponent<TMission> = ({
 
   return (
     <div key={id} className="ring-2 p-1 dark:bg-opacity-25 dark:bg-indigo-600">
-      <h2 className="text-center">{mission}</h2>
+      <h2 className="text-center">
+        <Link to={CREATE_MISSION_DETAIL_LINK(id)} className="text-white">
+          {mission}
+        </Link>
+      </h2>
       <p>
         {duration ? (
           <span>Launched on: </span>
@@ -119,12 +127,48 @@ export const Mission: FunctionComponent<TMission> = ({
         />
       </p>
       <Astronauts crew={astronauts} />
+      {media && <Gallery media={media} />}
       <button onClick={toggleNotes}>
         {noteVisibility ? "Hide" : "See"} notes
       </button>
       <p className={noteVisibility ? null : "invisible"}>{notes}</p>
     </div>
   );
+};
+
+type ImageProps = {
+  url: string;
+  width: number;
+  height: number;
+};
+export const Image: FunctionComponent<ImageProps> = ({
+  url,
+  width,
+  height,
+}) => <img src={url} width={width} height={height} loading={"lazy"} />;
+
+type YouTubeProps = {
+  url: string;
+};
+export const YouTubeVideo: FunctionComponent<YouTubeProps> = ({ url }) => (
+  <iframe
+    width="560"
+    height="315"
+    src={url}
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+);
+export const Gallery: FunctionComponent<{ media: TMedia[] }> = ({ media }) => {
+  const gallery = media.map(({ url, type }) => {
+    if (type === "IMAGE") {
+      return <Image url={url} width={200} height={200} />;
+    } else {
+      return <YouTubeVideo url={url} />;
+    }
+  });
+  return <div>{gallery}</div>;
 };
 
 export const Missions: FunctionComponent = () => {

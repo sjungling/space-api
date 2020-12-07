@@ -14,7 +14,7 @@ const App: FunctionComponent<{ client: any }> = ({ client }) => (
 );
 
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
+  window.addEventListener("loagitd", () => {
     navigator.serviceWorker
       .register("/service-worker.js")
       .then((registration) => {
