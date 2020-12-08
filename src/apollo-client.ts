@@ -9,7 +9,10 @@ import { isDevelopment } from "./utilities";
 
 declare let GRAPHQL_URI: string;
 
-const link = new HttpLink({ uri: GRAPHQL_URI, useGETForQueries: true });
+const link = new HttpLink({
+  uri: GRAPHQL_URI,
+  useGETForQueries: !isDevelopment(),
+});
 const cache = new InMemoryCache();
 
 export const createApolloClient = async (): Promise<

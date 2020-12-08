@@ -1,13 +1,14 @@
 {
   "scripts": {
-    "build": "yarn generate && rm -rf public/* && yarn build:webpack:dev",
+    "build": "yarn generate && rm -rf public/* && yarn build:webpack",
     "build:webpack": "webpack --config webpack.prod.js",
     "build:webpack:dev": "webpack --config webpack.dev.js",
     "generate": "graphql-codegen --config codegen-client.yml",
     "format": "prettier -w 'src/**/*.{ts,tsx,graphql,yml,json}' '{webpack,postcss,tailwind,vercel,.eslintrc}*.{js,json}'",
     "webpack": "webpack",
     "start": "npx webpack serve --config webpack.dev.js",
-    "lint": "eslint 'src/**/*.{ts,tsx}'"
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "check-all": "yarn format && yarn lint"
   },
   "name": "space-api",
   "version": "1.0.0",

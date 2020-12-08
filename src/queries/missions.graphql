@@ -15,6 +15,11 @@ query findAllMissions {
     astronauts {
       ...AstronautDetails
     }
+    media {
+      url
+      type
+      subType
+    }
   }
 }
 
@@ -27,6 +32,9 @@ query findMissionById($mission_id: Int!) {
         url
         type
         attribution
+        type
+        subType
+        description
       }
       astronauts {
         ...AstronautDetails

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { useParams } from "react-router-dom";
 import { NotFound, useFindMissionByIdQuery } from "../generated/graphql";
 import { LoadingComponent } from "../components/common";
-import { Mission } from "../components/missions/missions.component";
+import { MissionDetails } from "../components/missions/missions.component";
 
 const MissionPage: FunctionComponent = () => {
   const { mission_id } = useParams<{ mission_id: string }>();
@@ -23,7 +23,7 @@ const MissionPage: FunctionComponent = () => {
   if (data && data.mission.__typename === "Mission") {
     return (
       <React.Fragment>
-        <Mission {...data.mission} />
+        <MissionDetails {...data.mission} />
       </React.Fragment>
     );
   }
