@@ -1,5 +1,7 @@
 overwrite: true
-schema: "http://localhost:3000/api/graphql"
+schema: "https://api.spaceapi.dev/api/graphql"
+# Local Developmnet
+# schema: "http://localhost:3000/api/graphql"
 documents: "src/**/*.graphql"
 generates:
   src/generated/graphql.tsx:

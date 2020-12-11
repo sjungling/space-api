@@ -28,14 +28,6 @@ query findMissionById($mission_id: Int!) {
     __typename
     ... on Mission {
       ...MissionDetails
-      media {
-        url
-        type
-        attribution
-        type
-        subType
-        description
-      }
       astronauts {
         ...AstronautDetails
       }

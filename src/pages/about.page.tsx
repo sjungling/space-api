@@ -1,10 +1,34 @@
 import React, { FunctionComponent } from "react";
-import { Link } from "react-router-dom";
-import { HOME_PAGE_LINK } from "../constants/routes";
-const AboutPage: FunctionComponent = () => (
-  <div>
-    <h2>About this site</h2>
-    <Link to={HOME_PAGE_LINK}>Return to home</Link>
-  </div>
-);
+import Markdown from "markdown-to-jsx";
+import AboutContent from "./about.md";
+
+const AboutPage: FunctionComponent = () => {
+  return (
+    <div>
+      <Markdown
+        options={{
+          overrides: {
+            li: {
+              props: {
+                className: "list-disc list-inside",
+              },
+            },
+            h1: {
+              props: {
+                className: "center",
+              },
+            },
+            h2: {
+              props: {
+                className: "mt-2",
+              },
+            },
+          },
+        }}
+      >
+        {AboutContent}
+      </Markdown>
+    </div>
+  );
+};
 export default AboutPage;
