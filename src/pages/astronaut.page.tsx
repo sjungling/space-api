@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { AstronautDetail } from "../components/astronauts/astronauts.component";
 import { LoadingComponent } from "../components/common";
 import { NotFound, useFindAstronautByIdQuery } from "../generated/graphql";
+import { PageWrapper } from "./page-wrapper.component";
 
 const AstronautPage: FunctionComponent = () => {
   const { astronaut_id } = useParams<{ astronaut_id: string }>();
@@ -23,9 +24,11 @@ const AstronautPage: FunctionComponent = () => {
   }
   if (data && data.astronaut.__typename === "Astronaut") {
     return (
-      <React.Fragment>
+      <PageWrapper
+        title={`${data.astronaut.firstName} ${data.astronaut.lastName}`}
+      >
         <AstronautDetail {...data.astronaut} />
-      </React.Fragment>
+      </PageWrapper>
     );
   }
 };

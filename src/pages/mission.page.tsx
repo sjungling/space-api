@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { NotFound, useFindMissionByIdQuery } from "../generated/graphql";
 import { LoadingComponent } from "../components/common";
 import { MissionDetails } from "../components/missions/missions.component";
+import { PageWrapper } from "./page-wrapper.component";
 
 const MissionPage: FunctionComponent = () => {
   const { mission_id } = useParams<{ mission_id: string }>();
@@ -22,9 +23,12 @@ const MissionPage: FunctionComponent = () => {
   }
   if (data && data.mission.__typename === "Mission") {
     return (
-      <React.Fragment>
+      <PageWrapper
+        title={data.mission.mission}
+        description={`Facts, images, and random information about ${data.mission.mission}`}
+      >
         <MissionDetails {...data.mission} />
-      </React.Fragment>
+      </PageWrapper>
     );
   }
 };

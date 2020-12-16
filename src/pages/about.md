@@ -15,4 +15,4 @@ The schema and data set may evolve over time but today offers:
 
 ## How can I get started?
 
-Explore the API with the GraphQL Playground by going to https://api.spaceapi.dev/api/graphql. Alternatively, you can set this as the URI for a GraphQL Client and start building.
+Explore the API with the GraphQL Playground by going to https://graphql.spaceapi.dev/. Alternatively, you can set this as the URI for a GraphQL Client and start building.

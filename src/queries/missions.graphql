@@ -7,6 +7,7 @@ fragment MissionDetails on Mission {
   launchVehicle
   notes
   duration
+  status
 }
 
 query findAllMissions {
@@ -14,11 +15,6 @@ query findAllMissions {
     ...MissionDetails
     astronauts {
       ...AstronautDetails
-    }
-    media {
-      url
-      type
-      subType
     }
   }
 }
@@ -30,6 +26,10 @@ query findMissionById($mission_id: Int!) {
       ...MissionDetails
       astronauts {
         ...AstronautDetails
+      }
+      images(limit: 12) {
+        id
+        href
       }
     }
     ... on NotFound {

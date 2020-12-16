@@ -7,6 +7,9 @@
   }
   h1 {
     @apply text-2xl font-bold;
+    a {
+      @apply no-underline;
+    }
   }
   h2 {
     @apply text-xl font-bold;

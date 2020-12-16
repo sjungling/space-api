@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
-import { Mission as TMission, Media as TMedia } from "../../generated/graphql";
+import { Mission as TMission, Image as TImage } from "../../generated/graphql";
 import { AstronautCard } from "../astronauts/astronauts.component";
 import {
   convertSecondsToFormattedTime,
@@ -10,7 +10,7 @@ import {
 } from "../../utilities";
 import { Link } from "react-router-dom";
 import { CREATE_MISSION_DETAIL_LINK } from "../../constants/routes";
-import { Image, YouTubeVideo } from "../common";
+import { Image } from "../common/media.component";
 
 export const MissionVehicles: FunctionComponent<
   Pick<TMission, "launchVehicle" | "commandModule" | "lunarModule">
@@ -41,7 +41,7 @@ export const MissionDetails: FunctionComponent<TMission> = ({
   lunarModule,
   notes,
   duration,
-  media,
+  images,
 }) => {
   const missionDuration = convertSecondsToFormattedTime(duration);
   const [noteVisibility, setNoteVisibility] = useState(false);
@@ -102,48 +102,54 @@ export const MissionDetails: FunctionComponent<TMission> = ({
           </div>
         </div>
         <div>
-          <h3>Gallery</h3>
-          {media && <Gallery media={media} />}
+          {/* Notes */}
+          <h3>Notes</h3>
+
+          <button onClick={toggleNotes}>
+            {noteVisibility ? "Hide" : "See"} notes
+          </button>
+          <p className={noteVisibility ? null : "invisible"}>{notes}</p>
         </div>
       </div>
       <div>
-        <h3>Notes</h3>
-
-        <button onClick={toggleNotes}>
-          {noteVisibility ? "Hide" : "See"} notes
-        </button>
-        <p className={noteVisibility ? null : "invisible"}>{notes}</p>
+        {/* Media Gallery */}
+        <h3>Gallery</h3>
+        {images && <Gallery images={images} />}
       </div>
     </div>
   );
 };
 
-export const Gallery: FunctionComponent<{ media: TMedia[] }> = ({ media }) => {
-  const gallery = media.map(({ url, type }) => {
-    if (type === "IMAGE") {
-      return <Image src={url} width={200} height={200} />;
-    } else {
-      return <YouTubeVideo url={url} />;
-    }
-  });
-  return <div>{gallery}</div>;
+export const Gallery: FunctionComponent<{ images: TImage[] }> = ({
+  images,
+}) => {
+  const gallery = images.map(({ id, href }) => (
+    <>
+      <Image
+        key={id}
+        src={href}
+        width={200}
+        height={200}
+        lazy={true}
+        crop={"lfill"}
+      />
+    </>
+  ));
+  return (
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6  gap-1">
+      {gallery}
+    </div>
+  );
 };
 
 export const MissionCard: FunctionComponent<
-  Pick<TMission, "mission" | "id" | "launchDate" | "media">
-> = ({ id, mission, media }) => {
-  const { url } = media
-    .filter(({ type, subType }) => type === "IMAGE" && subType === "INSIGNIA")
-    .filter(Boolean)
-    .pop();
+  Pick<TMission, "mission" | "id" | "launchDate">
+> = ({ id, mission }) => {
   return (
     <div className="mission-card">
       <h2>
         <Link to={CREATE_MISSION_DETAIL_LINK(id)}>{mission}</Link>
       </h2>
-      <div className="w-5/6">
-        <Image src={url} />
-      </div>
     </div>
   );
 };

@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from "react";
 import Markdown from "markdown-to-jsx";
 import AboutContent from "./about.md";
+import { PageWrapper } from "./page-wrapper.component";
 
 const AboutPage: FunctionComponent = () => {
   return (
-    <div>
+    <PageWrapper title="About this project">
       <Markdown
         options={{
           overrides: {
@@ -28,7 +29,7 @@ const AboutPage: FunctionComponent = () => {
       >
         {AboutContent}
       </Markdown>
-    </div>
+    </PageWrapper>
   );
 };
 export default AboutPage;

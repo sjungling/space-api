@@ -4,4 +4,5 @@ dist/
 public/
 node_modules/
 .vercel
-src/generated/graphql.tsx
+src/generated/
+src/@types/

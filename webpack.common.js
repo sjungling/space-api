@@ -5,14 +5,12 @@ const webpack = require("webpack"); // to access built-in plugins
 const path = require("path");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
-const CopyPlugin = require("copy-webpack-plugin");
 const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin")
-  .default;
+
 const WorkboxPlugin = require("workbox-webpack-plugin");
 
-module.exports = {
+const webpackConfig = {
   mode: "production",
   entry: "./src/index.tsx",
   module: {
@@ -36,23 +34,20 @@ module.exports = {
   },
   plugins: [
     new ProgressBarPlugin(),
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({ verbose: true, cleanStaleWebpackAssets: true }),
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",
       chunkFilename: "[id].[contenthash].css",
     }),
-    new CopyPlugin({
-      patterns: [{ from: "./src/robots.txt", to: "." }],
-    }),
+
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       scriptLoading: "defer",
       publicPath: "/",
     }),
-    new HTMLInlineCSSWebpackPlugin(),
     new webpack.DefinePlugin({
       GRAPHQL_URI: JSON.stringify(
-        process.env.GRAPHQL_URI || "https://api.spaceapi.dev/api/graphql"
+        process.env.GRAPHQL_URI || "https://graph.spaceapi.dev/"
       ),
       "process.env.NODE_ENV": JSON.stringify(
         process.env.NODE_ENV || "development"
@@ -102,3 +97,4 @@ module.exports = {
     path: path.resolve(process.cwd(), "public"),
   },
 };
+module.exports = webpackConfig;
