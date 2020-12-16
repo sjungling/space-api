@@ -9,10 +9,8 @@ export type ImageProps = {
 };
 
 function optionsToString(options: { [key: string]: string | number }): string {
-  return Object.keys(options)
-    .map((key) => {
-      return [key, options[key]].join("_");
-    })
+  return Object.entries(options)
+    .map(([key, value]) => [key, value].join("_"))
     .join(",");
 }
 export const Image: FunctionComponent<ImageProps> = (image) => {
