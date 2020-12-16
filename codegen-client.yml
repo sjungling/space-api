@@ -1,14 +1,20 @@
 overwrite: true
-schema: "https://space-api-graphql.vercel.app/api/graphql"
+schema: "https://graph.spaceapi.dev/"
+# Local Developmnet
+# schema: "http://localhost:3000/api/graphql"
 documents: "src/**/*.graphql"
 generates:
   src/generated/graphql.tsx:
     plugins:
       - "typescript"
-      - "typescript-operations"
+      - typescript-operations
       - "typescript-react-apollo"
-    config: 
-        skipDocumentsValidation: true
-        flattenGeneratedTypes: true
-        pureMagicComment: true
-        documentMode: "documentNode"
+    config:
+      skipDocumentsValidation: true
+      flattenGeneratedTypes: true
+      pureMagicComment: true
+      documentMode: "documentNode"
+  src/@types/graphql.d.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"

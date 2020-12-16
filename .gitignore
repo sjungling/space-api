@@ -11,3 +11,4 @@ schema.graphql
 .cache
 api/types/
 stats.json
+.env

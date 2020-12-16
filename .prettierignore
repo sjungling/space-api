@@ -4,3 +4,5 @@ dist/
 public/
 node_modules/
 .vercel
+src/generated/
+src/@types/

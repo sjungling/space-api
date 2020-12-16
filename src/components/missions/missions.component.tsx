@@ -1,41 +1,16 @@
-import React, { FunctionComponent, useState, MouseEvent } from "react";
+import React, { FunctionComponent, useState } from "react";
+import { Mission as TMission, Image as TImage } from "../../generated/graphql";
+import { AstronautCard } from "../astronauts/astronauts.component";
 import {
-  useFindAllMissionsQuery,
-  Mission as TMission,
-  Scalars,
-} from "../../generated/graphql";
-import { Astronauts } from "../astronauts/astronauts.component";
-import { LoadingComponent } from "../common/loading.component";
-import { convertSecondsToFormattedTime } from "../../utilities";
-type FormatDateOptions = {
-  weekday?: "narrow" | "short" | "long";
-  era?: "narrow" | "short" | "long";
-  year?: "numeric" | "2-digit";
-  month?: "numeric" | "2-digit" | "narrow" | "short" | "long";
-  day?: "numeric" | "2-digit";
-  hour?: "numeric" | "2-digit";
-  minute?: "numeric" | "2-digit";
-  second?: "numeric" | "2-digit";
-  timeZoneName?: "short" | "long";
-
-  // Time zone to express it in
-  timeZone?: string;
-  // Force 12-hour or 24-hour
-  hour12?: boolean;
-};
-
-const formatISODate = (date: Scalars["DateTime"]): string => {
-  return new Date(date).toISOString();
-};
-const formatLaunchDate = (
-  launchDate: Scalars["DateTime"],
-  formatOptions?: FormatDateOptions
-): string => {
-  const stringifiedDate = new Date(launchDate);
-  return new Intl.DateTimeFormat("en-US", formatOptions ?? undefined).format(
-    stringifiedDate
-  );
-};
+  convertSecondsToFormattedTime,
+  formatISODate,
+  formatDate,
+  longDateFormat,
+  longTimeFormat,
+} from "../../utilities";
+import { Link } from "react-router-dom";
+import { CREATE_MISSION_DETAIL_LINK } from "../../constants/routes";
+import { Image } from "../common/media.component";
 
 export const MissionVehicles: FunctionComponent<
   Pick<TMission, "launchVehicle" | "commandModule" | "lunarModule">
@@ -56,7 +31,7 @@ export const MissionVehicles: FunctionComponent<
     )}
   </div>
 );
-export const Mission: FunctionComponent<TMission> = ({
+export const MissionDetails: FunctionComponent<TMission> = ({
   id,
   mission,
   astronauts,
@@ -66,80 +41,115 @@ export const Mission: FunctionComponent<TMission> = ({
   lunarModule,
   notes,
   duration,
+  images,
 }) => {
   const missionDuration = convertSecondsToFormattedTime(duration);
-  const launchDateFormat: FormatDateOptions = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  const launchDateTimeFormat: FormatDateOptions = {
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true,
-    timeZoneName: "long",
-  };
   const [noteVisibility, setNoteVisibility] = useState(false);
-  const toggleNotes = (event: MouseEvent<HTMLButtonElement>) => {
+  const toggleNotes = () => {
     setNoteVisibility(!noteVisibility);
   };
 
   return (
     <div key={id} className="ring-2 p-1 dark:bg-opacity-25 dark:bg-indigo-600">
-      <h2 className="text-center">{mission}</h2>
-      <p>
-        {duration ? (
-          <span>Launched on: </span>
-        ) : (
-          <span>Planned to launch on: </span>
-        )}
-        <time dateTime={formatISODate(launchDate)}>
-          {formatLaunchDate(launchDate, launchDateFormat)} at{" "}
-          {formatLaunchDate(launchDate, launchDateTimeFormat)}
-        </time>
-        {duration && (
+      <h2 className="text-center">
+        <Link to={CREATE_MISSION_DETAIL_LINK(id)}>{mission}</Link>
+      </h2>
+      <div className="grid grid-cols-1 gap-1 md:grid-cols-2 md:gap-4">
+        <div>
+          <h3>Vehicles</h3>
+          <MissionVehicles
+            launchVehicle={launchVehicle}
+            commandModule={commandModule}
+            lunarModule={lunarModule}
+          />
+        </div>
+        <aside>
+          <h3>Chronology</h3>
           <p>
-            Duration:{" "}
-            {Object.keys(missionDuration).map((key) => {
-              return (
-                <span>
-                  {missionDuration[key]} {key}{" "}
-                </span>
-              );
-            })}
+            {duration ? (
+              <span>Launched on: </span>
+            ) : (
+              <span>Planned to launch on: </span>
+            )}
+            <time dateTime={formatISODate(launchDate)}>
+              {formatDate(launchDate, longDateFormat)}
+            </time>{" "}
+            at{" "}
+            <time dateTime={formatISODate(launchDate)}>
+              {formatDate(launchDate, longTimeFormat)}
+            </time>
+            {duration && (
+              <p>
+                Duration:{" "}
+                {Object.keys(missionDuration).map((key) => {
+                  return (
+                    <span key={key}>
+                      {missionDuration[key]} {key}{" "}
+                    </span>
+                  );
+                })}
+              </p>
+            )}
           </p>
-        )}
-      </p>
-      <p>
-        <MissionVehicles
-          launchVehicle={launchVehicle}
-          commandModule={commandModule}
-          lunarModule={lunarModule}
-        />
-      </p>
-      <Astronauts crew={astronauts} />
-      <button onClick={toggleNotes}>
-        {noteVisibility ? "Hide" : "See"} notes
-      </button>
-      <p className={noteVisibility ? null : "invisible"}>{notes}</p>
+        </aside>
+        <div>
+          <h3>Mission Crew</h3>
+          <div className="grid md:grid-cols-1 grid-cols-3">
+            {astronauts.map((astronaut) => (
+              <AstronautCard key={astronaut.id} {...astronaut} />
+            ))}
+            {/* <Astronauts crew={astronauts} /> */}
+          </div>
+        </div>
+        <div>
+          {/* Notes */}
+          <h3>Notes</h3>
+
+          <button onClick={toggleNotes}>
+            {noteVisibility ? "Hide" : "See"} notes
+          </button>
+          <p className={noteVisibility ? null : "invisible"}>{notes}</p>
+        </div>
+      </div>
+      <div>
+        {/* Media Gallery */}
+        <h3>Gallery</h3>
+        {images && <Gallery images={images} />}
+      </div>
     </div>
   );
 };
 
-export const Missions: FunctionComponent = () => {
-  const { data, loading, error } = useFindAllMissionsQuery();
-  if (error) {
-    console.error(error);
-    return <h1>Error fetching</h1>;
-  }
-  if (loading) return <LoadingComponent />;
-  const missionList = data.missions?.map((mission) => {
-    return <Mission {...mission} />;
-  });
+export const Gallery: FunctionComponent<{ images: TImage[] }> = ({
+  images,
+}) => {
+  const gallery = images.map(({ id, href }) => (
+    <>
+      <Image
+        key={id}
+        src={href}
+        width={200}
+        height={200}
+        lazy={true}
+        crop={"lfill"}
+      />
+    </>
+  ));
   return (
-    <div className="grid grid-cols-1  gap-1 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
-      {missionList}
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6  gap-1">
+      {gallery}
+    </div>
+  );
+};
+
+export const MissionCard: FunctionComponent<
+  Pick<TMission, "mission" | "id" | "launchDate">
+> = ({ id, mission }) => {
+  return (
+    <div className="mission-card">
+      <h2>
+        <Link to={CREATE_MISSION_DETAIL_LINK(id)}>{mission}</Link>
+      </h2>
     </div>
   );
 };

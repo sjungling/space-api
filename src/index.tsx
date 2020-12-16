@@ -4,8 +4,11 @@ import { ApolloProvider } from "@apollo/client/react";
 import "./styles.css";
 import { createApolloClient } from "./apollo-client";
 import { SpaceRouter } from "./routes";
+import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 
-const App: FunctionComponent<{ client: any }> = ({ client }) => (
+const App: FunctionComponent<{
+  client: ApolloClient<NormalizedCacheObject>;
+}> = ({ client }) => (
   <>
     <ApolloProvider client={client}>
       <SpaceRouter />
@@ -14,7 +17,7 @@ const App: FunctionComponent<{ client: any }> = ({ client }) => (
 );
 
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
+  window.addEventListener("loagitd", () => {
     navigator.serviceWorker
       .register("/service-worker.js")
       .then((registration) => {

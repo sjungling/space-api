@@ -5,11 +5,17 @@ import {
   HeaderComponent,
   FooterComponent,
 } from "./components/common";
-import { ABOUT_PAGE_LINK, HOME_PAGE_LINK } from "./constants/routes";
+import {
+  ABOUT_PAGE_LINK,
+  ASTRONAUT_DETAIL_LINK,
+  HOME_PAGE_LINK,
+  MISSION_DETAIL_LINK,
+} from "./constants/routes";
 
 const routes = [
   {
     path: ABOUT_PAGE_LINK,
+    exact: true,
     component: lazy(
       () =>
         import(
@@ -18,7 +24,28 @@ const routes = [
     ),
   },
   {
+    path: MISSION_DETAIL_LINK,
+    exact: false,
+    component: lazy(
+      () =>
+        import(
+          /* webpackPrefetch: true, webpackChunkName: "mission-details" */ "./pages/mission.page"
+        )
+    ),
+  },
+  {
+    path: ASTRONAUT_DETAIL_LINK,
+    exact: false,
+    component: lazy(
+      () =>
+        import(
+          /* webpackPrefetch: true, webpackChunkName: "astronaut-details" */ "./pages/astronaut.page"
+        )
+    ),
+  },
+  {
     path: HOME_PAGE_LINK,
+    exact: true,
     component: lazy(
       () =>
         import(
@@ -35,8 +62,8 @@ export const SpaceRouter: FunctionComponent = () => (
       <main>
         <Suspense fallback={<LoadingComponent />}>
           <Switch>
-            {routes.map((route) => (
-              <Route {...route} />
+            {routes.map((route, idx) => (
+              <Route key={idx} {...route} />
             ))}
           </Switch>
         </Suspense>
