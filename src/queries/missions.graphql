@@ -36,6 +36,7 @@ query findMissionById($mission_id: Int!) {
       images(limit: 12) {
         id
         href
+        title
       }
     }
     ... on NotFound {

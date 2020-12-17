@@ -128,7 +128,7 @@ export const MissionDetails: FunctionComponent<TMission> = ({
 export const Gallery: FunctionComponent<{ images: TImage[] }> = ({
   images,
 }) => {
-  const gallery = images.map(({ id, href }) => (
+  const gallery = images.map(({ id, href, title }) => (
     <>
       <Image
         key={id}
@@ -137,6 +137,7 @@ export const Gallery: FunctionComponent<{ images: TImage[] }> = ({
         height={200}
         lazy={true}
         crop={"lfill"}
+        alt={title}
       />
     </>
   ));
