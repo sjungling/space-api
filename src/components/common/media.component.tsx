@@ -6,6 +6,7 @@ export type ImageProps = {
   lazy?: boolean;
   src: string;
   crop?: "scale" | "fit" | "lpad" | "thumb" | "crop" | "lfill";
+  alt: string;
 };
 
 function optionsToString(options: { [key: string]: string | number }): string {
@@ -14,8 +15,8 @@ function optionsToString(options: { [key: string]: string | number }): string {
     .join(",");
 }
 export const Image: FunctionComponent<ImageProps> = (image) => {
-  const CLOUDINARY_PREFIX = `http://res.cloudinary.com/spaceapi/image/`;
-  const { src, width, height, lazy } = image;
+  const CLOUDINARY_PREFIX = `//res.cloudinary.com/spaceapi/image/`;
+  const { src, width, height, lazy, alt } = image;
   const options = {
     w: width,
     h: height,
@@ -33,6 +34,7 @@ export const Image: FunctionComponent<ImageProps> = (image) => {
       src={imageHref}
       width={width}
       height={height}
+      alt={alt}
     />
   );
 };
