@@ -148,7 +148,7 @@ export const Gallery: FunctionComponent<{ images: TImage[] }> = ({
 };
 
 export const MissionCard: FunctionComponent<
-  Pick<TMission, "mission" | "id" | "launchDate">
+  Pick<TMission, "mission" | "id">
 > = ({ id, mission }) => {
   const client = useApolloClient();
 

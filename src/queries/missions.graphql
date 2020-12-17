@@ -10,6 +10,12 @@ fragment MissionDetails on Mission {
   status
 }
 
+query findAllMissionsForNav {
+  missions {
+    id
+    mission
+  }
+}
 query findAllMissions {
   missions {
     ...MissionDetails

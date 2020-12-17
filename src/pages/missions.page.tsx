@@ -1,20 +1,18 @@
 import React, { FunctionComponent } from "react";
 import { MissionCard } from "../components/missions/missions.component";
 import { LoadingComponent } from "../components/common";
-import { useFindAllMissionsQuery } from "../generated/graphql";
+import { useFindAllMissionsForNavQuery } from "../generated/graphql";
 import { PageWrapper } from "./page-wrapper.component";
 
 const MissionsPage: FunctionComponent = () => {
-  const { data, loading, error } = useFindAllMissionsQuery();
+  const { data, loading, error } = useFindAllMissionsForNavQuery();
   if (error) {
     console.error(error);
     return <h1>Failure to Launch 🤕</h1>;
   }
   if (loading) return <LoadingComponent />;
-  const missionList = data.missions?.map(({ id, mission, launchDate }) => {
-    return (
-      <MissionCard key={id} id={id} mission={mission} launchDate={launchDate} />
-    );
+  const missionList = data.missions?.map(({ id, mission }) => {
+    return <MissionCard key={id} id={id} mission={mission} />;
   });
   return (
     <PageWrapper title="Manned Apollo Missions">
