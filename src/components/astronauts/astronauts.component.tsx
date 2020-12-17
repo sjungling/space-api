@@ -24,11 +24,9 @@ export const Astronauts: FunctionComponent<{ crew: TAstronaut[] }> = ({
   ));
   return <ul className="mr-10">{astronauts}</ul>;
 };
-export const Astronaut: FunctionComponent<TAstronaut> = ({
-  id,
-  firstName,
-  lastName,
-}) => {
+export const Astronaut: FunctionComponent<
+  Pick<TAstronaut, "id" | "firstName" | "lastName">
+> = ({ id, firstName, lastName }) => {
   return (
     <li key={id}>
       <Link to={CREATE_ASTRONAUT_DETAIL_LINK(id)}>
