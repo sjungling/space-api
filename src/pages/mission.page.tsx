@@ -11,6 +11,7 @@ const MissionPage: FunctionComponent = () => {
     variables: {
       mission_id: Number(mission_id),
     },
+    fetchPolicy: "cache-and-network",
   });
 
   if (loading) return <LoadingComponent />;

@@ -1,5 +1,9 @@
 import React, { FunctionComponent, useState } from "react";
-import { Mission as TMission, Image as TImage } from "../../generated/graphql";
+import {
+  Mission as TMission,
+  Image as TImage,
+  FindMissionByIdDocument,
+} from "../../generated/graphql";
 import { AstronautCard } from "../astronauts/astronauts.component";
 import {
   convertSecondsToFormattedTime,
@@ -11,6 +15,7 @@ import {
 import { Link } from "react-router-dom";
 import { CREATE_MISSION_DETAIL_LINK } from "../../constants/routes";
 import { Image } from "../common/media.component";
+import { useApolloClient } from "@apollo/client";
 
 export const MissionVehicles: FunctionComponent<
   Pick<TMission, "launchVehicle" | "commandModule" | "lunarModule">
@@ -145,10 +150,22 @@ export const Gallery: FunctionComponent<{ images: TImage[] }> = ({
 export const MissionCard: FunctionComponent<
   Pick<TMission, "mission" | "id" | "launchDate">
 > = ({ id, mission }) => {
+  const client = useApolloClient();
+
+  const preloadQuery: React.MouseEventHandler = (): void => {
+    client.query({
+      query: FindMissionByIdDocument,
+      variables: {
+        mission_id: Number(id),
+      },
+    });
+  };
   return (
     <div className="mission-card">
       <h2>
-        <Link to={CREATE_MISSION_DETAIL_LINK(id)}>{mission}</Link>
+        <Link to={CREATE_MISSION_DETAIL_LINK(id)} onMouseOver={preloadQuery}>
+          {mission}
+        </Link>
       </h2>
     </div>
   );

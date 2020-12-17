@@ -9,6 +9,6 @@ public/
 dist/
 schema.graphql
 .cache
-api/types/
+src/@types/
 stats.json
 .env
