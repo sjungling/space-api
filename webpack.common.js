@@ -61,7 +61,7 @@ const webpackConfig = {
       runtimeCaching: [
         {
           // Match any request that ends with .png, .jpg, .jpeg or .svg.
-          urlPattern: /http:\/\/res\.cloudinary\.com\/(.*)/,
+          urlPattern: /https?:\/\/res\.cloudinary\.com\/(.*)/,
 
           // Apply a cache-first strategy.
           handler: "CacheFirst",

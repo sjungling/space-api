@@ -14,7 +14,7 @@ function optionsToString(options: { [key: string]: string | number }): string {
     .join(",");
 }
 export const Image: FunctionComponent<ImageProps> = (image) => {
-  const CLOUDINARY_PREFIX = `http://res.cloudinary.com/spaceapi/image/`;
+  const CLOUDINARY_PREFIX = `//res.cloudinary.com/spaceapi/image/`;
   const { src, width, height, lazy } = image;
   const options = {
     w: width,
