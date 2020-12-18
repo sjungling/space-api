@@ -110,6 +110,7 @@ const webpackConfig = {
       react: "preact/compat",
       "react-dom/test-utils": "preact/test-utils",
       "react-dom": "preact/compat",
+      assert: "assert",
       // Must be below test-utils
     },
   },
