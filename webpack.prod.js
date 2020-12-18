@@ -13,7 +13,9 @@ module.exports = merge(common, {
     minimize: true,
   },
   plugins: [
-    new HTMLInlineCSSWebpackPlugin(),
+    new HTMLInlineCSSWebpackPlugin({
+      leaveCSSFile: true,
+    }),
     new CopyPlugin({
       patterns: [{ from: "./src/robots.txt", to: "." }],
     }),

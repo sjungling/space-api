@@ -52,14 +52,19 @@ export const MissionDetails: FunctionComponent<TMission> = ({
   duration,
   images,
 }) => {
-  const missionDuration = convertSecondsToFormattedTime(duration);
+  const missionDuration = duration
+    ? convertSecondsToFormattedTime(duration)
+    : null;
   const [noteVisibility, setNoteVisibility] = useState(false);
   const toggleNotes = () => {
     setNoteVisibility(!noteVisibility);
   };
 
   return (
-    <div key={id} className="ring-2 p-1 dark:bg-opacity-25 dark:bg-indigo-600">
+    <div
+      key={id}
+      className="ring-nasaRed ring-2 p-1 dark:bg-opacity-25 dark:bg-nasaBlue"
+    >
       <h2 className="text-center">
         <Link to={CREATE_MISSION_DETAIL_LINK(id)}>{mission}</Link>
       </h2>

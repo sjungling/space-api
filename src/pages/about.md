@@ -12,7 +12,7 @@ The schema and data set may evolve over time but today offers:
 
 - `Mission` -- A thing
 - `Astronaut` -- A person
-- `Image` - A visual thing
+- `Image` -- A visual thing
 
 ## How can I get started?
 

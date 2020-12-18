@@ -3,7 +3,7 @@
 
 @layer base {
   html {
-    @apply bg-gray-100 dark:bg-gray-800;
+    @apply bg-gray-100 dark:bg-gray-500;
   }
   h1 {
     @apply text-2xl font-bold;
@@ -21,7 +21,7 @@
     @apply text-base font-bold;
   }
   a {
-    @apply text-blue-600 underline dark:text-white;
+    @apply text-nasaBlue underline dark:text-white;
   }
   header {
     @apply text-gray-800 text-center dark:text-white;
@@ -33,7 +33,7 @@
     @apply text-gray-600 text-center dark:text-white;
   }
   button {
-    @apply py-2 px-4 bg-indigo-500 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75;
+    @apply py-2 px-4 bg-nasaBlue text-white font-semibold rounded-lg shadow-md hover:bg-nasaBlue focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75 dark:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-800 dark:hover:text-gray-50;
   }
   iframe {
     @apply absolute p-0 m-0 top-0 bottom-0 right-0 left-0 h-full w-full;

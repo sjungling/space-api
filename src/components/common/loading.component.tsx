@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 
 export const LoadingComponent: FunctionComponent = () => (
-  <div className="flex items-center justify-center h-screen">
+  <div className="block align-middle text-center">
     <span
       role="img"
       aria-label="loading"

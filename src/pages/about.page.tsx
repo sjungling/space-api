@@ -52,7 +52,7 @@ const AboutPage: FunctionComponent = () => {
       </Markdown>
 
       <div
-        className="w-3/4 p-0 m-0"
+        className="w-11/12 p-0 m-0"
         style={{
           minHeight: "50vh",
           height: "50vh",

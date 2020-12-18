@@ -15,10 +15,10 @@ const MissionPage: FunctionComponent = () => {
   });
 
   if (loading) return <LoadingComponent />;
-  if (error || data.mission.__typename === "NotFound") {
+  if (error || data?.mission.__typename === "NotFound") {
     return (
       <>
-        <p>{(data.mission as NotFound)!.message}</p>
+        <p>{(data?.mission as NotFound)!.message}</p>
       </>
     );
   }
