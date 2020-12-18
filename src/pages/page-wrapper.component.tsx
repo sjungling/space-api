@@ -12,7 +12,7 @@ export const PageWrapper: FunctionComponent<PageWrapperProps> = ({
 }) => {
   const BASE_TITLE = "SpaceAPI.dev";
   useMetaTags({
-    title: title ? `${[title]} - ${BASE_TITLE}` : BASE_TITLE,
+    title: title ? `${title} - ${BASE_TITLE}` : BASE_TITLE,
     description,
   });
   return <div>{children}</div>;

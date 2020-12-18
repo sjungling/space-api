@@ -40,11 +40,13 @@ export const Image: FunctionComponent<ImageProps> = (image) => {
 };
 
 export type YouTubeProps = {
+  id: string;
   url: string;
 };
-export const YouTubeVideo: FunctionComponent<YouTubeProps> = ({ url }) => (
+export const YouTubeVideo: FunctionComponent<YouTubeProps> = ({ id, url }) => (
   <div className="iframe-container" style={{ paddingTop: "75%" }}>
     <iframe
+      title={`Video for ${id}`}
       className=""
       src={url}
       frameBorder="0"
