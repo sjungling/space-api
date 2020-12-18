@@ -28,6 +28,9 @@ if ("serviceWorker" in navigator) {
       });
   });
 }
-createApolloClient().then((client) => {
-  render(<App client={client} />, document.getElementById("root"));
-});
+createApolloClient()
+  .then((client) => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    render(<App client={client} />, document.getElementById("root"));
+  })
+  .catch((e) => console.error(e));

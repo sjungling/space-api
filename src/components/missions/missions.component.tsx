@@ -31,7 +31,11 @@ export const MissionVehicles: FunctionComponent<
     )}{" "}
     {lunarModule && (
       <span>
-        and landing on the 🌖 with <strong>{lunarModule}</strong>
+        and landing on the{" "}
+        <span role="img" aria-label="moon">
+          🌖
+        </span>{" "}
+        with <strong>{lunarModule}</strong>
       </span>
     )}
   </div>
@@ -113,7 +117,7 @@ export const MissionDetails: FunctionComponent<TMission> = ({
           <button onClick={toggleNotes}>
             {noteVisibility ? "Hide" : "See"} notes
           </button>
-          <p className={noteVisibility ? null : "invisible"}>{notes}</p>
+          <p className={noteVisibility ? "" : "invisible"}>{notes}</p>
         </div>
       </div>
       <div>
@@ -154,7 +158,7 @@ export const MissionCard: FunctionComponent<
   const client = useApolloClient();
 
   const preloadQuery: React.MouseEventHandler = (): void => {
-    client.query({
+    void client.query({
       query: FindMissionByIdDocument,
       variables: {
         mission_id: Number(id),

@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin"); // installed via npm
 const HtmlWebpackPlugin = require("html-webpack-plugin"); // installed via npm
@@ -127,7 +129,7 @@ const webpackConfig = {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           name: "vendors",
-          chunks: "all",
+          chunks: "initial",
         },
       },
     },
