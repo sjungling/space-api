@@ -32,6 +32,8 @@ const MissionPage: FunctionComponent = () => {
       </PageWrapper>
     );
   }
+  // Fallback
+  return null;
 };
 
 export default MissionPage;
