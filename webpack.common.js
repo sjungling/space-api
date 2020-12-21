@@ -81,7 +81,7 @@ const webpackConfig = {
         },
         {
           // Match any request that ends with .png, .jpg, .jpeg or .svg.
-          urlPattern: /https?:\/\/(graph\.spaceapi\.dev|.*herokuapp\.com)\/?*/,
+          urlPattern: /https?:\/\/(graph\.spaceapi\.dev|.*herokuapp\.com)\/.*/,
 
           // Apply a cache-first strategy.
           handler: "StaleWhileRevalidate",
