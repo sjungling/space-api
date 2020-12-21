@@ -72,16 +72,16 @@ const webpackConfig = {
             // Use a custom cache name.
             cacheName: "cloudinary-images",
 
-            // Only cache 10 images.
+            // Only cache 256 images.
             expiration: {
-              maxEntries: 100,
+              maxEntries: 256,
             },
             cacheableResponse: { statuses: [0, 200] },
           },
         },
         {
           // Match any request that ends with .png, .jpg, .jpeg or .svg.
-          urlPattern: /https?:\/\/graph\.spaceapi\.dev\/(.*)/,
+          urlPattern: /https?:\/\/(graph\.spaceapi\.dev|.*herokuapp\.com)\/?*/,
 
           // Apply a cache-first strategy.
           handler: "StaleWhileRevalidate",
@@ -90,10 +90,10 @@ const webpackConfig = {
             // Use a custom cache name.
             cacheName: "graphql-queries",
 
-            // Only cache 10 images.
+            // Only cache 32 queries for one day.
             expiration: {
-              maxAgeSeconds: 60 * 5,
-              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24,
+              maxEntries: 32,
             },
             cacheableResponse: { statuses: [0, 200] },
           },
