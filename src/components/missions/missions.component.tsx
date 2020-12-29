@@ -136,7 +136,7 @@ export const Gallery: FunctionComponent<{
   const placeholderImages = [...Array(12)].map((_, idx) => (
     <div
       key={idx}
-      className="bg-gray-400"
+      className="bg-gray-400 animate-pulse"
       style={{ width: 200, height: 200 }}
     />
   ));
