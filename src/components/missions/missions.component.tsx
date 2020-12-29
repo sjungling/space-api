@@ -1,8 +1,10 @@
 import React, { FunctionComponent, useState } from "react";
 import {
-  Mission as TMission,
-  Image as TImage,
+  TMission,
   FindMissionByIdDocument,
+  TImageGalleryFragment,
+  TMissionDetailsFragment,
+  TAstronautDetailsFragment,
 } from "../../generated/graphql";
 import { AstronautCard } from "../astronauts/astronauts.component";
 import {
@@ -40,7 +42,9 @@ export const MissionVehicles: FunctionComponent<
     )}
   </div>
 );
-export const MissionDetails: FunctionComponent<TMission> = ({
+export const MissionDetails: FunctionComponent<
+  TMissionDetailsFragment & { astronauts: Array<TAstronautDetailsFragment> }
+> = ({
   id,
   mission,
   astronauts,
@@ -50,7 +54,6 @@ export const MissionDetails: FunctionComponent<TMission> = ({
   lunarModule,
   notes,
   duration,
-  images,
 }) => {
   const missionDuration = duration
     ? convertSecondsToFormattedTime(duration)
@@ -61,10 +64,7 @@ export const MissionDetails: FunctionComponent<TMission> = ({
   };
 
   return (
-    <div
-      key={id}
-      className="ring-nasaRed ring-2 p-1 dark:bg-opacity-25 dark:bg-nasaBlue"
-    >
+    <>
       <h2 className="text-center">
         <Link to={CREATE_MISSION_DETAIL_LINK(id)}>{mission}</Link>
       </h2>
@@ -92,7 +92,7 @@ export const MissionDetails: FunctionComponent<TMission> = ({
             <time dateTime={formatISODate(launchDate)}>
               {formatDate(launchDate, longTimeFormat)}
             </time>
-            {duration && (
+            {missionDuration && (
               <p>
                 Duration:{" "}
                 {Object.keys(missionDuration).map((key) => {
@@ -109,35 +109,39 @@ export const MissionDetails: FunctionComponent<TMission> = ({
         <div>
           <h3>Mission Crew</h3>
           <div className="grid md:grid-cols-1 grid-cols-3">
-            {astronauts.map((astronaut) => (
-              <AstronautCard key={astronaut.id} {...astronaut} />
-            ))}
-            {/* <Astronauts crew={astronauts} /> */}
+            {Array.isArray(astronauts) &&
+              astronauts.map((astronaut) => (
+                <AstronautCard key={astronaut.id} {...astronaut} />
+              ))}
           </div>
         </div>
         <div>
           {/* Notes */}
           <h3>Notes</h3>
-
           <button onClick={toggleNotes}>
             {noteVisibility ? "Hide" : "See"} notes
           </button>
           <p className={noteVisibility ? "" : "invisible"}>{notes}</p>
         </div>
       </div>
-      <div>
-        {/* Media Gallery */}
-        <h3>Gallery</h3>
-        {images && <Gallery images={images} />}
-      </div>
-    </div>
+    </>
   );
 };
 
-export const Gallery: FunctionComponent<{ images: TImage[] }> = ({
-  images,
-}) => {
-  const gallery = images.map(({ id, href, title }) => (
+export const Gallery: FunctionComponent<{
+  images?: TImageGalleryFragment[];
+  usePlaceholder?: boolean;
+}> = ({ images, usePlaceholder }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const placeholderImages = [...Array(12)].map((_, idx) => (
+    <div
+      key={idx}
+      className="bg-gray-400 animate-pulse"
+      style={{ width: 200, height: 200 }}
+    />
+  ));
+
+  const gallery = images?.map(({ id, href, title }) => (
     <>
       <Image
         key={id}
@@ -152,7 +156,7 @@ export const Gallery: FunctionComponent<{ images: TImage[] }> = ({
   ));
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6  gap-1">
-      {gallery}
+      {usePlaceholder && !images ? placeholderImages : gallery}
     </div>
   );
 };

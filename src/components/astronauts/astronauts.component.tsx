@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
 import { CREATE_ASTRONAUT_DETAIL_LINK } from "../../constants/routes";
-import { Astronaut as TAstronaut } from "../../generated/graphql";
+import { TAstronaut, TAstronautDetailsFragment } from "../../generated/graphql";
 
-export const AstronautCard: FunctionComponent<TAstronaut> = ({
+export const AstronautCard: FunctionComponent<TAstronautDetailsFragment> = ({
   id,
   firstName,
   lastName,
@@ -11,6 +11,9 @@ export const AstronautCard: FunctionComponent<TAstronaut> = ({
   return (
     <div key={id} className="astronaut-card">
       <h4>
+        <span role="img" aria-label="Astronaut">
+          👨‍🚀
+        </span>
         {firstName} {lastName}
       </h4>
     </div>
@@ -36,7 +39,7 @@ export const Astronaut: FunctionComponent<
   );
 };
 
-export const AstronautDetail: FunctionComponent<TAstronaut> = ({
+export const AstronautDetail: FunctionComponent<TAstronautDetailsFragment> = ({
   firstName,
   lastName,
 }) => (

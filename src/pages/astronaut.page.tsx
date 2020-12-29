@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { useParams } from "react-router-dom";
 import { AstronautDetail } from "../components/astronauts/astronauts.component";
 import { LoadingComponent } from "../components/common";
-import { NotFound, useFindAstronautByIdQuery } from "../generated/graphql";
+import { TNotFound, useFindAstronautByIdQuery } from "../generated/graphql";
 import { PageWrapper } from "./page-wrapper.component";
 
 const AstronautPage: FunctionComponent = () => {
@@ -15,22 +15,18 @@ const AstronautPage: FunctionComponent = () => {
   });
 
   if (loading) return <LoadingComponent />;
-  if (error || data.astronaut.__typename === "NotFound") {
-    return (
-      <>
-        <p>{(data.astronaut as NotFound)!.message}</p>
-      </>
-    );
+  if (error || data?.astronaut.__typename === "NotFound") {
+    return <p>{(data?.astronaut as TNotFound)!.message}</p>;
   }
-  if (data && data.astronaut.__typename === "Astronaut") {
+  if (data?.astronaut.__typename === "Astronaut") {
+    const { firstName, lastName } = data.astronaut;
     return (
-      <PageWrapper
-        title={`${data.astronaut.firstName} ${data.astronaut.lastName}`}
-      >
+      <PageWrapper title={`${firstName} ${lastName}`}>
         <AstronautDetail {...data.astronaut} />
       </PageWrapper>
     );
   }
+  return null;
 };
 
 export default AstronautPage;

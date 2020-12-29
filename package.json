@@ -4,7 +4,7 @@
     "build:webpack": "NODE_ENV=production webpack --config webpack.prod.js",
     "build:webpack:dev": "webpack --config webpack.dev.js",
     "generate": "graphql-codegen --config codegen-client.yml",
-    "format": "prettier -w 'src/**/*.{ts,tsx,graphql,yml,json}' '{webpack,postcss,tailwind,vercel,.eslintrc}*.{js,json}'",
+    "format": "prettier -w 'src/**/*.{ts,tsx,graphql,yml,json}' '{webpack,postcss,tailwind,vercel,.eslintrc}*.{js,json}' '*.md'",
     "webpack": "webpack",
     "prestart": "yarn generate",
     "start": "npx webpack serve --config webpack.dev.js",
