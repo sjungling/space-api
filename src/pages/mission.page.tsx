@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, { FunctionComponent } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -53,6 +51,7 @@ const MissionGallery: FunctionComponent<{ id: number }> = ({ id }) => {
     variables: {
       mission_id: Number(id),
     },
+    returnPartialData: true,
   });
 
   if (!error) {

@@ -26,6 +26,7 @@ const AstronautPage: FunctionComponent = () => {
       </PageWrapper>
     );
   }
+  return null;
 };
 
 export default AstronautPage;
