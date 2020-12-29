@@ -1,8 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, { FunctionComponent } from "react";
 import { useParams } from "react-router-dom";
-import { NotFound, useFindMissionByIdQuery } from "../generated/graphql";
+import {
+  TNotFound,
+  useFindMissionByIdQuery,
+  useMissionImageGalleryQuery,
+} from "../generated/graphql";
 import { LoadingComponent } from "../components/common";
-import { MissionDetails } from "../components/missions/missions.component";
+import {
+  Gallery,
+  MissionDetails,
+} from "../components/missions/missions.component";
 import { PageWrapper } from "./page-wrapper.component";
 
 const MissionPage: FunctionComponent = () => {
@@ -13,26 +22,47 @@ const MissionPage: FunctionComponent = () => {
     },
     fetchPolicy: "cache-and-network",
   });
-
   if (loading) return <LoadingComponent />;
   if (error || data?.mission.__typename === "NotFound") {
     return (
       <>
-        <p>{(data?.mission as NotFound)!.message}</p>
+        <p>{(data?.mission as TNotFound)!.message}</p>
       </>
     );
   }
   if (data && data.mission.__typename === "Mission") {
+    const { mission } = data.mission;
     return (
       <PageWrapper
-        title={data.mission.mission}
-        description={`Facts, images, and random information about ${data.mission.mission}`}
+        title={mission}
+        description={`Facts, images, and random information about ${mission}`}
       >
-        <MissionDetails {...data.mission} />
+        <div className="ring-nasaRed ring-2 p-1 dark:bg-opacity-25 dark:bg-nasaBlue">
+          <MissionDetails {...data.mission} />
+          <MissionGallery id={Number(mission_id)} />
+        </div>
       </PageWrapper>
     );
   }
   // Fallback
+  return null;
+};
+
+const MissionGallery: FunctionComponent<{ id: number }> = ({ id }) => {
+  const { data, loading, error } = useMissionImageGalleryQuery({
+    variables: {
+      mission_id: Number(id),
+    },
+  });
+
+  if (!error) {
+    return (
+      <div>
+        <h3>Gallery</h3>
+        <Gallery images={data?.mission.images} usePlaceholder={loading} />
+      </div>
+    );
+  }
   return null;
 };
 

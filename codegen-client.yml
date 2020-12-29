@@ -1,6 +1,6 @@
 overwrite: true
 schema: "https://graph.spaceapi.dev/"
-# Local Developmnet
+# Local Development
 # schema: "http://localhost:3000/api/graphql"
 documents: "src/**/*.graphql"
 generates:
@@ -10,10 +10,12 @@ generates:
       - typescript-operations
       - "typescript-react-apollo"
     config:
-      skipDocumentsValidation: true
-      flattenGeneratedTypes: true
       pureMagicComment: true
       documentMode: "documentNode"
+      optimizeDocumentNode: true
+      skipTypename: true
+      typesPrefix: "T"
+      fragmentVariableSuffix: "Fragment"
   src/@types/graphql.d.ts:
     plugins:
       - "typescript"
