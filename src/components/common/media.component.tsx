@@ -14,7 +14,7 @@ function optionsToString(options: { [key: string]: string | number }): string {
     .map(([key, value]) => [key, value].join("_"))
     .join(",");
 }
-export const Image: FunctionComponent<ImageProps> = (image) => {
+export const ImageComponent: FunctionComponent<ImageProps> = (image) => {
   const CLOUDINARY_PREFIX = `//res.cloudinary.com/spaceapi/image/`;
   const { src, width, height, lazy, alt } = image;
   const options = {
@@ -43,7 +43,10 @@ export type YouTubeProps = {
   id: string;
   url: string;
 };
-export const YouTubeVideo: FunctionComponent<YouTubeProps> = ({ id, url }) => (
+export const YouTubeVideoComponent: FunctionComponent<YouTubeProps> = ({
+  id,
+  url,
+}) => (
   <div className="iframe-container" style={{ paddingTop: "75%" }}>
     <iframe
       title={`Video for ${id}`}

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
-import { MissionCard } from "../components/missions/missions.component";
+import { MissionCardComponent } from "../components/missions/missions.component";
 import { LoadingComponent } from "../components/common";
-import { useFindAllMissionsForNavQuery } from "../generated/graphql";
+import { useFindAllMissionsForNavQuery } from "../generated/apollo-hooks";
 import { PageWrapper } from "./page-wrapper.component";
 
 const MissionsPage: FunctionComponent = () => {
@@ -22,7 +22,7 @@ const MissionsPage: FunctionComponent = () => {
     ?.map((mission) => {
       if (mission && mission.__typename === "Mission") {
         return (
-          <MissionCard
+          <MissionCardComponent
             key={mission.id}
             id={mission.id}
             mission={mission.mission}

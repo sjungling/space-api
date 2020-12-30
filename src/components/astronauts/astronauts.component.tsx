@@ -1,9 +1,12 @@
 import React, { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
 import { CREATE_ASTRONAUT_DETAIL_LINK } from "../../constants/routes";
-import { TAstronaut, TAstronautDetailsFragment } from "../../generated/graphql";
+import {
+  Astronaut,
+  AstronautDetailsFragment,
+} from "../../generated/apollo-hooks";
 
-export const AstronautCard: FunctionComponent<TAstronautDetailsFragment> = ({
+export const AstronautCardComponent: FunctionComponent<AstronautDetailsFragment> = ({
   id,
   firstName,
   lastName,
@@ -19,16 +22,21 @@ export const AstronautCard: FunctionComponent<TAstronautDetailsFragment> = ({
     </div>
   );
 };
-export const Astronauts: FunctionComponent<{ crew: TAstronaut[] }> = ({
+export const AstronautsComponent: FunctionComponent<{ crew: Astronaut[] }> = ({
   crew,
 }) => {
   const astronauts = crew.map(({ id, firstName, lastName }) => (
-    <Astronaut key={id} id={id} firstName={firstName} lastName={lastName} />
+    <AstronautComponent
+      key={id}
+      id={id}
+      firstName={firstName}
+      lastName={lastName}
+    />
   ));
   return <ul className="mr-10">{astronauts}</ul>;
 };
-export const Astronaut: FunctionComponent<
-  Pick<TAstronaut, "id" | "firstName" | "lastName">
+export const AstronautComponent: FunctionComponent<
+  Pick<Astronaut, "id" | "firstName" | "lastName">
 > = ({ id, firstName, lastName }) => {
   return (
     <li key={id}>
@@ -39,7 +47,7 @@ export const Astronaut: FunctionComponent<
   );
 };
 
-export const AstronautDetail: FunctionComponent<TAstronautDetailsFragment> = ({
+export const AstronautDetail: FunctionComponent<AstronautDetailsFragment> = ({
   firstName,
   lastName,
 }) => (

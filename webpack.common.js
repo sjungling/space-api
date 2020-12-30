@@ -92,7 +92,7 @@ const webpackConfig = {
 
             // Only cache 32 queries for one day.
             expiration: {
-              maxAgeSeconds: 60 * 60 * 24,
+              maxAgeSeconds: 60 * 60 * 24 * 7,
               maxEntries: 32,
             },
             cacheableResponse: { statuses: [0, 200] },

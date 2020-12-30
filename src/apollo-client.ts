@@ -14,7 +14,9 @@ const link = ApolloLink.from([
   createHttpLink({ uri: GRAPHQL_URI, useGETForQueries: true }),
 ]);
 
-const cache = new InMemoryCache();
+const cache = new InMemoryCache({
+  // addTypename: true,
+});
 
 export const createApolloClient = async (): Promise<
   ApolloClient<NormalizedCacheObject>
