@@ -7,6 +7,7 @@ import {
 } from "@apollo/client";
 import { persistCache, LocalStorageWrapper } from "apollo3-cache-persist";
 import { isDevelopment } from "./utilities";
+import generatedIntrospection from "./generated/apollo-client-fragment";
 
 declare let GRAPHQL_URI: string;
 
@@ -15,7 +16,7 @@ const link = ApolloLink.from([
 ]);
 
 const cache = new InMemoryCache({
-  // addTypename: true,
+  possibleTypes: generatedIntrospection.possibleTypes,
 });
 
 export const createApolloClient = async (): Promise<
