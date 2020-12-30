@@ -1,14 +1,14 @@
 import React, { FunctionComponent } from "react";
 import { useParams } from "react-router-dom";
 import {
-  TNotFound,
+  NotFound,
   useFindMissionByIdQuery,
   useMissionImageGalleryQuery,
-} from "../generated/graphql";
+} from "../generated/apollo-hooks";
 import { LoadingComponent } from "../components/common";
 import {
-  Gallery,
-  MissionDetails,
+  GalleryComponent,
+  MissionDetailsComponent,
 } from "../components/missions/missions.component";
 import { PageWrapper } from "./page-wrapper.component";
 
@@ -18,13 +18,12 @@ const MissionPage: FunctionComponent = () => {
     variables: {
       mission_id: Number(mission_id),
     },
-    fetchPolicy: "cache-and-network",
   });
   if (loading) return <LoadingComponent />;
   if (error || data?.mission.__typename === "NotFound") {
     return (
       <>
-        <p>{(data?.mission as TNotFound)!.message}</p>
+        <p>{(data?.mission as NotFound)!.message}</p>
       </>
     );
   }
@@ -36,7 +35,7 @@ const MissionPage: FunctionComponent = () => {
         description={`Facts, images, and random information about ${mission}`}
       >
         <div className="ring-nasaRed ring-2 p-1 dark:bg-opacity-25 dark:bg-nasaBlue">
-          <MissionDetails {...data.mission} />
+          <MissionDetailsComponent {...data.mission} />
           <MissionGallery id={Number(mission_id)} />
         </div>
       </PageWrapper>
@@ -58,7 +57,10 @@ const MissionGallery: FunctionComponent<{ id: number }> = ({ id }) => {
     return (
       <div>
         <h3>Gallery</h3>
-        <Gallery images={data?.mission.images} usePlaceholder={loading} />
+        {loading && <GalleryComponent usePlaceholder={loading} />}
+        {data?.mission.__typename === "Mission" && (
+          <GalleryComponent images={data.mission.images} />
+        )}
       </div>
     );
   }

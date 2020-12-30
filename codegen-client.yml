@@ -1,22 +1,74 @@
 overwrite: true
-schema: "https://graph.spaceapi.dev/"
+schema:
+  - "https://graph.spaceapi.dev/"
+  - ./src/local-schema.graphql
 # Local Development
 # schema: "http://localhost:3000/api/graphql"
 documents: "src/**/*.graphql"
 generates:
-  src/generated/graphql.tsx:
+  src/generated/apollo-client-helpers.ts:
     plugins:
+      - add:
+          content: >
+            /**
+             * THIS IS A GENERATED FILE
+             */
+      - add:
+          content: >
+            /**
+              * Apollo Client Helpers
+              * @see https://graphql-code-generator.com/docs/plugins/typescript-apollo-client-helpers
+              */
+      - typescript-apollo-client-helpers
+  src/generated/apollo-client-fragment.ts:
+    plugins:
+      - add:
+          content: >
+            /**
+             * THIS IS A GENERATED FILE
+             */
+      - add:
+          placement: content
+          content: >
+            /**
+             * Fragment Matcher
+             * @see https://graphql-code-generator.com/docs/plugins/fragment-matcher
+             */
+      - fragment-matcher
+    config:
+      useExplicitTyping: true
+      federation: true
+  src/generated/apollo-hooks.tsx:
+    plugins:
+      - add:
+          content: >
+            /**
+             * THIS IS A GENERATED FILE
+             */
+      - add:
+          content: >
+            /**
+             * TypeScript
+             * @see https://graphql-code-generator.com/docs/plugins/typescript
+             */
       - "typescript"
+      - add:
+          placement: content
+          content: >
+            /**
+             * TypeScript Operations
+             * @see https://graphql-code-generator.com/docs/plugins/typescript-operations
+             */
       - typescript-operations
+      - add:
+          placement: content
+          content: >
+            /**
+             * TypeScript React Apollo Hooks
+             * @see https://graphql-code-generator.com/docs/plugins/typescript-react-apollo
+             */
       - "typescript-react-apollo"
     config:
       pureMagicComment: true
       documentMode: "documentNode"
-      optimizeDocumentNode: true
-      skipTypename: true
-      typesPrefix: "T"
-      fragmentVariableSuffix: "Fragment"
-  src/@types/graphql.d.ts:
-    plugins:
-      - "typescript"
-      - "typescript-operations"
+      preResolveTypes: true

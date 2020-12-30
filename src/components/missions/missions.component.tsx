@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useState } from "react";
 import {
-  TMission,
+  Mission,
   FindMissionByIdDocument,
-  TImageGalleryFragment,
-  TMissionDetailsFragment,
-  TAstronautDetailsFragment,
-} from "../../generated/graphql";
-import { AstronautCard } from "../astronauts/astronauts.component";
+  ImageGalleryFragment,
+  MissionDetailsFragment,
+  AstronautDetailsFragment,
+} from "../../generated/apollo-hooks";
+import { AstronautCardComponent } from "../astronauts/astronauts.component";
 import {
   convertSecondsToFormattedTime,
   formatISODate,
@@ -16,11 +16,11 @@ import {
 } from "../../utilities";
 import { Link } from "react-router-dom";
 import { CREATE_MISSION_DETAIL_LINK } from "../../constants/routes";
-import { Image } from "../common/media.component";
+import { ImageComponent } from "../common/media.component";
 import { useApolloClient } from "@apollo/client";
 
-export const MissionVehicles: FunctionComponent<
-  Pick<TMission, "launchVehicle" | "commandModule" | "lunarModule">
+export const MissionVehiclesComponent: FunctionComponent<
+  Pick<Mission, "launchVehicle" | "commandModule" | "lunarModule">
 > = ({ launchVehicle, commandModule, lunarModule }) => (
   <div>
     <span>
@@ -42,8 +42,8 @@ export const MissionVehicles: FunctionComponent<
     )}
   </div>
 );
-export const MissionDetails: FunctionComponent<
-  TMissionDetailsFragment & { astronauts: Array<TAstronautDetailsFragment> }
+export const MissionDetailsComponent: FunctionComponent<
+  MissionDetailsFragment & { astronauts: Array<AstronautDetailsFragment> }
 > = ({
   id,
   mission,
@@ -71,7 +71,7 @@ export const MissionDetails: FunctionComponent<
       <div className="grid grid-cols-1 gap-1 md:grid-cols-2 md:gap-4">
         <div>
           <h3>Vehicles</h3>
-          <MissionVehicles
+          <MissionVehiclesComponent
             launchVehicle={launchVehicle}
             commandModule={commandModule}
             lunarModule={lunarModule}
@@ -111,7 +111,7 @@ export const MissionDetails: FunctionComponent<
           <div className="grid md:grid-cols-1 grid-cols-3">
             {Array.isArray(astronauts) &&
               astronauts.map((astronaut) => (
-                <AstronautCard key={astronaut.id} {...astronaut} />
+                <AstronautCardComponent key={astronaut.id} {...astronaut} />
               ))}
           </div>
         </div>
@@ -128,8 +128,8 @@ export const MissionDetails: FunctionComponent<
   );
 };
 
-export const Gallery: FunctionComponent<{
-  images?: TImageGalleryFragment[];
+export const GalleryComponent: FunctionComponent<{
+  images?: ImageGalleryFragment[];
   usePlaceholder?: boolean;
 }> = ({ images, usePlaceholder }) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -143,7 +143,7 @@ export const Gallery: FunctionComponent<{
 
   const gallery = images?.map(({ id, href, title }) => (
     <>
-      <Image
+      <ImageComponent
         key={id}
         src={href}
         width={200}
@@ -161,8 +161,8 @@ export const Gallery: FunctionComponent<{
   );
 };
 
-export const MissionCard: FunctionComponent<
-  Pick<TMission, "mission" | "id">
+export const MissionCardComponent: FunctionComponent<
+  Pick<Mission, "mission" | "id">
 > = ({ id, mission }) => {
   const client = useApolloClient();
 

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { useParams } from "react-router-dom";
 import { AstronautDetail } from "../components/astronauts/astronauts.component";
 import { LoadingComponent } from "../components/common";
-import { TNotFound, useFindAstronautByIdQuery } from "../generated/graphql";
+import { NotFound, useFindAstronautByIdQuery } from "../generated/apollo-hooks";
 import { PageWrapper } from "./page-wrapper.component";
 
 const AstronautPage: FunctionComponent = () => {
@@ -16,7 +16,7 @@ const AstronautPage: FunctionComponent = () => {
 
   if (loading) return <LoadingComponent />;
   if (error || data?.astronaut.__typename === "NotFound") {
-    return <p>{(data?.astronaut as TNotFound)!.message}</p>;
+    return <p>{(data?.astronaut as NotFound)!.message}</p>;
   }
   if (data?.astronaut.__typename === "Astronaut") {
     const { firstName, lastName } = data.astronaut;

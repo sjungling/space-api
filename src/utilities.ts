@@ -1,4 +1,4 @@
-import { Scalars } from "./generated/graphql";
+import { Scalars } from "./generated/apollo-hooks";
 
 /**
  * @summary Helper for determining compile/run-time environment
