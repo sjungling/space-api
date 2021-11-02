@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import useMetaTags from "react-metatags-hook";
+import Head from "next/head";
 
 export type PageWrapperProps = {
   title?: string;
@@ -11,9 +11,13 @@ export const PageWrapper: FunctionComponent<PageWrapperProps> = ({
   children,
 }) => {
   const BASE_TITLE = "SpaceAPI.dev";
-  useMetaTags({
-    title: title ? `${title} - ${BASE_TITLE}` : BASE_TITLE,
-    description,
-  });
-  return <div className="container mx-auto px-4">{children}</div>;
+  return (
+    <div className="container mx-auto px-4">
+      <Head>
+        <title>{title ? `${title} - ${BASE_TITLE}` : BASE_TITLE}</title>
+        <meta name="description" content={description} />
+      </Head>
+      {children}
+    </div>
+  );
 };

@@ -1,22 +1,24 @@
 import React, { FunctionComponent } from "react";
-import { useParams } from "react-router-dom";
 import {
   NotFound,
   useFindMissionByIdQuery,
   useMissionImageGalleryQuery,
-} from "../generated/apollo-hooks";
-import { LoadingComponent } from "../components/common";
+} from "../../generated/apollo-hooks";
+import { LoadingComponent } from "../../components/common";
 import {
   GalleryComponent,
   MissionDetailsComponent,
-} from "../components/missions/missions.component";
-import { PageWrapper } from "./page-wrapper.component";
+} from "../../components/missions/missions.component";
+import { PageWrapper } from "../page-wrapper.component";
+import { useRouter } from "next/router";
 
 const MissionPage: FunctionComponent = () => {
-  const { mission_id } = useParams<{ mission_id: string }>();
+  const router = useRouter();
+  const { missionId } = router.query;
+
   const { data, loading, error } = useFindMissionByIdQuery({
     variables: {
-      mission_id: Number(mission_id),
+      missionId: Number(missionId),
     },
   });
   if (loading) return <LoadingComponent />;
@@ -36,7 +38,7 @@ const MissionPage: FunctionComponent = () => {
       >
         <div className="ring-nasaRed ring-2 p-1 dark:bg-opacity-25 dark:bg-nasaBlue">
           <MissionDetailsComponent {...data.mission} />
-          <MissionGallery id={Number(mission_id)} />
+          <MissionGallery id={Number(missionId)} />
         </div>
       </PageWrapper>
     );
@@ -48,7 +50,7 @@ const MissionPage: FunctionComponent = () => {
 const MissionGallery: FunctionComponent<{ id: number }> = ({ id }) => {
   const { data, loading, error } = useMissionImageGalleryQuery({
     variables: {
-      mission_id: Number(id),
+      missionId: Number(id),
     },
     returnPartialData: true,
   });

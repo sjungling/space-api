@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-
+import Image from "next/image";
 export type ImageProps = {
   width: number;
   height: number;
@@ -29,9 +29,9 @@ export const ImageComponent: FunctionComponent<ImageProps> = (image) => {
   )}/${src}`;
 
   return (
-    <img
+    <Image
       loading={lazy ? "lazy" : undefined}
-      src={imageHref}
+      src={`https:${imageHref}`}
       width={width}
       height={height}
       alt={alt}

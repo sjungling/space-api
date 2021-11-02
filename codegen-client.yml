@@ -75,3 +75,5 @@ generates:
       pureMagicComment: true
       documentMode: "documentNode"
       preResolveTypes: true
+      scalars:
+        DateTime: Date
