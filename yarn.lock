@@ -6849,23 +6849,6 @@ postcss@8, postcss@^8.1.6, postcss@^8.2.1, postcss@^8.2.15, postcss@^8.3.5:
     picocolors "^1.0.0"
     source-map-js "^0.6.2"
 
-preact-dom@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/preact-dom/-/preact-dom-1.0.1.tgz#29ca381ef38badf9fe275fe6211629e8f8867f00"
-  integrity sha1-Kco4HvOLrfn+J1/mIRYp6PiGfwA=
-  dependencies:
-    preact "^3.4.0"
-
-preact@10.5.15:
-  version "10.5.15"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-10.5.15.tgz#6df94d8afecf3f9e10a742fd8c362ddab464225f"
-  integrity sha512-5chK29n6QcJc3m1lVrKQSQ+V7K1Gb8HeQY6FViQ5AxCAEGu3DaHffWNDkC9+miZgsLvbvU9rxbV1qinGHMHzqA==
-
-preact@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-3.4.0.tgz#a52840f9a20d1555b3be7399883ae4b427fd9d2b"
-  integrity sha1-pShA+aINFVWzvnOZiDrktCf9nSs=
-
 prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"

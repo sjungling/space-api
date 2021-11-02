@@ -5,8 +5,8 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin"); // installed via
 const HtmlWebpackPlugin = require("html-webpack-plugin"); // installed via npm
 const webpack = require("webpack"); // to access built-in plugins
 const path = require("path");
-const BundleAnalyzerPlugin =
-  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
 const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -110,9 +110,6 @@ const webpackConfig = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
     alias: {
-      react: "preact/compat",
-      "react-dom/test-utils": "preact/test-utils",
-      "react-dom": "preact/compat",
       assert: "assert",
       // Must be below test-utils
     },
