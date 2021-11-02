@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "preserve",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "module": "esnext",
@@ -13,8 +13,28 @@
     "skipLibCheck": true,
     "strictNullChecks": true,
     "outDir": "./public/",
-    "typeRoots": ["./node_modules/@types", "src/@types"]
+    "typeRoots": [
+      "./node_modules/@types",
+      "src/@types"
+    ],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "isolatedModules": true
   },
-  "include": ["src"],
-  "exclude": ["**/node_modules", "**/.*", "scripts/**"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/.*",
+    "scripts/**"
+  ]
 }

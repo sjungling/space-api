@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { ABOUT_PAGE_LINK } from "../../constants/routes";
 
 export const FooterComponent: FunctionComponent = () => (
@@ -7,7 +7,7 @@ export const FooterComponent: FunctionComponent = () => (
     <nav>
       <ul>
         <li className="inline mr-4">
-          <Link to={ABOUT_PAGE_LINK}>About</Link>
+          <Link href={ABOUT_PAGE_LINK}>About</Link>
         </li>
         <li className="inline mr-4">
           <a href="https://github.com/sjungling/space-api">GitHub</a>

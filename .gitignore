@@ -5,10 +5,10 @@ node_modules
 *.log
 **/generated/*
 .cache
-public/
 dist/
 schema.graphql
 .cache
 src/@types/
 stats.json
 .env
+.next/

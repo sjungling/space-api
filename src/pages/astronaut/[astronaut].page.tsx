@@ -1,16 +1,19 @@
 import React, { FunctionComponent } from "react";
-import { useParams } from "react-router-dom";
-import { AstronautDetail } from "../components/astronauts/astronauts.component";
-import { LoadingComponent } from "../components/common";
-import { NotFound, useFindAstronautByIdQuery } from "../generated/apollo-hooks";
-import { PageWrapper } from "./page-wrapper.component";
+import { AstronautDetail } from "../../components/astronauts/astronauts.component";
+import { LoadingComponent } from "../../components/common";
+import {
+  NotFound,
+  useFindAstronautByIdQuery,
+} from "../../generated/apollo-hooks";
+import { PageWrapper } from "../page-wrapper.component";
+import { useRouter } from "next/router";
 
 const AstronautPage: FunctionComponent = () => {
-  const { astronaut_id } = useParams<{ astronaut_id: string }>();
+  const { query } = useRouter();
 
   const { data, loading, error } = useFindAstronautByIdQuery({
     variables: {
-      astronaut_id: Number(astronaut_id),
+      astronaut_id: Number(query.astronaut),
     },
   });
 

@@ -16,8 +16,8 @@ fragment ImageGallery on Image {
   title
 }
 
-query missionImageGallery($mission_id: Int!) {
-  mission(id: $mission_id) {
+query missionImageGallery($missionId: Int!) {
+  mission(id: $missionId) {
     ... on Mission {
       id
       images(limit: 12) {
@@ -41,8 +41,8 @@ query findAllMissions {
   }
 }
 
-query findMissionById($mission_id: Int!) {
-  mission(id: $mission_id) {
+query findMissionById($missionId: Int!) {
+  mission(id: $missionId) {
     ... on Mission {
       ...MissionDetails
       astronauts {

@@ -1,7 +1,8 @@
-import React, { useEffect, FunctionComponent } from "react";
+import React, { FunctionComponent } from "react";
 import Markdown from "markdown-to-jsx";
 import AboutContent from "./about.md";
 import { PageWrapper } from "./page-wrapper.component";
+import Script from "next/script";
 
 const DEFAULT_QUERY = `
 query ($missionId: Int!) {
@@ -21,31 +22,42 @@ query ($missionId: Int!) {
 const DEFAULT_VARIABLES = {
   missionId: 3,
 };
-declare const window: never;
+
 const AboutPage: FunctionComponent = () => {
-  useEffect(() => {
-    if (window && document) {
-      const script = document.createElement("script");
-      const body = document.getElementsByTagName("body")[0];
-      script.src =
-        "https://embeddable-explorer.cdn.apollographql.com/_latest/embeddable-explorer.umd.production.min.js";
-      body.appendChild(script);
-      script.addEventListener("load", () => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-        new window.EmbeddedExplorer({
-          target: "#embedded-explorer",
-          graphRef: "SpaceAPI-o3aoab@current",
-          endpointUrl: "https://obscure-falls-20397.herokuapp.com/",
-          initialState: {
-            document: DEFAULT_QUERY,
-            variables: DEFAULT_VARIABLES,
-          },
-        });
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (window && document) {
+  //     const script = document.createElement("script");
+  //     const body = document.getElementsByTagName("body")[0];
+  //     script.src = "";
+  //     body.appendChild(script);
+  //     script.addEventListener("load", () => {
+  //       if (window.EmbeddedExplore) {
+
+  //       }
+  //     });
+  //   }
+  // }, []);
   return (
     <PageWrapper title="About this project">
+      <Script
+        id="explorer"
+        src="https://embeddable-explorer.cdn.apollographql.com/_latest/embeddable-explorer.umd.production.min.js"
+        onLoad={() => {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+          new EmbeddedExplorer({
+            target: "#embedded-explorer",
+            graphRef: "SpaceAPI-o3aoab@current",
+            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+            endpointUrl: `${process.env.NEXT_PUBLIC_GRAPHQL_URI}`,
+            initialState: {
+              document: DEFAULT_QUERY,
+              variables: DEFAULT_VARIABLES,
+            },
+          });
+        }}
+      />
       <Markdown
         options={{
           overrides: {

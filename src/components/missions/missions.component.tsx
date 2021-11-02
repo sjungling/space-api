@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useState } from "react";
 import {
   Mission,
-  FindMissionByIdDocument,
   ImageGalleryFragment,
   MissionDetailsFragment,
   AstronautDetailsFragment,
@@ -14,11 +13,10 @@ import {
   longDateFormat,
   longTimeFormat,
 } from "../../utilities";
-import { Link } from "react-router-dom";
 import { CREATE_MISSION_DETAIL_LINK } from "../../constants/routes";
 import { ImageComponent } from "../common/media.component";
-import { useApolloClient } from "@apollo/client";
 import { Emoji } from "../utilities/emoji.component";
+import Link from "next/link";
 
 export const MissionVehiclesComponent: FunctionComponent<
   Pick<Mission, "launchVehicle" | "commandModule" | "lunarModule">
@@ -64,7 +62,7 @@ export const MissionDetailsComponent: FunctionComponent<
   return (
     <>
       <h2 className="text-center">
-        <Link to={CREATE_MISSION_DETAIL_LINK(id)}>{mission}</Link>
+        <Link href={CREATE_MISSION_DETAIL_LINK(id)}>{mission}</Link>
       </h2>
       <div className="grid grid-cols-1 gap-1 md:grid-cols-2 md:gap-4">
         <div>
@@ -162,22 +160,10 @@ export const GalleryComponent: FunctionComponent<{
 export const MissionCardComponent: FunctionComponent<
   Pick<Mission, "mission" | "id">
 > = ({ id, mission }) => {
-  const client = useApolloClient();
-
-  const preloadQuery: React.MouseEventHandler = (): void => {
-    void client.query({
-      query: FindMissionByIdDocument,
-      variables: {
-        mission_id: Number(id),
-      },
-    });
-  };
   return (
     <div className="mission-card">
       <h2>
-        <Link to={CREATE_MISSION_DETAIL_LINK(id)} onMouseOver={preloadQuery}>
-          {mission}
-        </Link>
+        <Link href={CREATE_MISSION_DETAIL_LINK(id)}>{mission}</Link>
       </h2>
     </div>
   );

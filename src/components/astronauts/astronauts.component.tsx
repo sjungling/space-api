@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { CREATE_ASTRONAUT_DETAIL_LINK } from "../../constants/routes";
 import {
   Astronaut,
@@ -36,7 +36,7 @@ export const AstronautComponent: FunctionComponent<
 > = ({ id, firstName, lastName }) => {
   return (
     <li key={id}>
-      <Link to={CREATE_ASTRONAUT_DETAIL_LINK(id)}>
+      <Link href={CREATE_ASTRONAUT_DETAIL_LINK(id)}>
         {lastName}, {firstName}
       </Link>
     </li>
