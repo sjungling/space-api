@@ -1,7 +1,10 @@
 import React, { FunctionComponent } from "react";
 import { MissionCardComponent } from "../components/missions/missions.component";
 import { LoadingComponent } from "../components/common";
-import { useFindAllMissionsForNavQuery } from "../generated/apollo-hooks";
+import {
+  Mission,
+  useFindAllMissionsForNavQuery,
+} from "../generated/apollo-hooks";
 import { PageWrapper } from "./page-wrapper.component";
 
 const MissionsPage: FunctionComponent = () => {
@@ -18,23 +21,15 @@ const MissionsPage: FunctionComponent = () => {
     );
   }
   if (loading) return <LoadingComponent />;
-  const missionList = data?.missions
-    ?.map((mission) => {
-      if (mission && mission.__typename === "Mission") {
-        return (
-          <MissionCardComponent
-            key={mission.id}
-            id={mission.id}
-            mission={mission.mission}
-          />
-        );
-      }
-    })
-    .filter(Boolean);
   return (
     <PageWrapper title="Manned Apollo Missions">
       <div className="grid grid-cols-1  gap-1 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
-        {missionList}
+        {data?.missions
+          ?.filter((mission) => mission?.__typename === "Mission")
+          .filter(Boolean)
+          .map(({ id, mission }: Mission) => (
+            <MissionCardComponent key={id} id={id} mission={mission} />
+          ))}
       </div>
     </PageWrapper>
   );

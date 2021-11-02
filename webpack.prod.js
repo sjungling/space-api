@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { merge } = require("webpack-merge");
 const CopyPlugin = require("copy-webpack-plugin");
-const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin")
-  .default;
+const HTMLInlineCSSWebpackPlugin =
+  require("html-inline-css-webpack-plugin").default;
 const common = require("./webpack.common.js");
 const webpack = require("webpack");
 

@@ -6,22 +6,19 @@ import {
   AstronautDetailsFragment,
 } from "../../generated/apollo-hooks";
 
-export const AstronautCardComponent: FunctionComponent<AstronautDetailsFragment> = ({
-  id,
-  firstName,
-  lastName,
-}) => {
-  return (
-    <div key={id} className="astronaut-card">
-      <h4>
-        <span role="img" aria-label="Astronaut">
-          👨‍🚀
-        </span>
-        {firstName} {lastName}
-      </h4>
-    </div>
-  );
-};
+export const AstronautCardComponent: FunctionComponent<AstronautDetailsFragment> =
+  ({ id, firstName, lastName }) => {
+    return (
+      <div key={id} className="astronaut-card">
+        <h4>
+          <span role="img" aria-label="Astronaut">
+            👨‍🚀
+          </span>
+          {firstName} {lastName}
+        </h4>
+      </div>
+    );
+  };
 export const AstronautsComponent: FunctionComponent<{ crew: Astronaut[] }> = ({
   crew,
 }) => {

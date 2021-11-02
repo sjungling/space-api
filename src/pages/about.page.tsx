@@ -1,9 +1,7 @@
-import React, { FunctionComponent } from "react";
+import React, { useEffect, FunctionComponent } from "react";
 import Markdown from "markdown-to-jsx";
 import AboutContent from "./about.md";
 import { PageWrapper } from "./page-wrapper.component";
-import { GraphiQL } from "graphiql";
-import "graphiql/graphiql.min.css";
 
 const DEFAULT_QUERY = `
 query ($missionId: Int!) {
@@ -20,11 +18,32 @@ query ($missionId: Int!) {
   }
 }
 `;
-const DEFAULT_VARIABLES = `{
-  "missionId": 3
-}
-`;
+const DEFAULT_VARIABLES = {
+  missionId: 3,
+};
+declare const window: never;
 const AboutPage: FunctionComponent = () => {
+  useEffect(() => {
+    if (window && document) {
+      const script = document.createElement("script");
+      const body = document.getElementsByTagName("body")[0];
+      script.src =
+        "https://embeddable-explorer.cdn.apollographql.com/_latest/embeddable-explorer.umd.production.min.js";
+      body.appendChild(script);
+      script.addEventListener("load", () => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+        new window.EmbeddedExplorer({
+          target: "#embedded-explorer",
+          graphRef: "SpaceAPI-o3aoab@current",
+          endpointUrl: "https://obscure-falls-20397.herokuapp.com/",
+          initialState: {
+            document: DEFAULT_QUERY,
+            variables: DEFAULT_VARIABLES,
+          },
+        });
+      });
+    }
+  }, []);
   return (
     <PageWrapper title="About this project">
       <Markdown
@@ -52,31 +71,15 @@ const AboutPage: FunctionComponent = () => {
       </Markdown>
 
       <div
-        className="w-11/12 p-0 m-0"
+        className="w-8/12 p-0 m-0 "
         style={{
+          position: "relative",
           minHeight: "50vh",
-          height: "50vh",
+          width: "90vw",
+          height: "60vh",
         }}
-      >
-        <GraphiQL
-          defaultQuery={DEFAULT_QUERY}
-          variables={DEFAULT_VARIABLES}
-          defaultVariableEditorOpen={true}
-          docExplorerOpen={true}
-          fetcher={async (graphQLParams) => {
-            const data = await fetch("https://graph.spaceapi.dev/", {
-              method: "POST",
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(graphQLParams),
-              credentials: "same-origin",
-            });
-            return data.json().catch(() => data.text());
-          }}
-        />
-      </div>
+        id="embedded-explorer"
+      ></div>
     </PageWrapper>
   );
 };

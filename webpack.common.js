@@ -5,8 +5,8 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin"); // installed via
 const HtmlWebpackPlugin = require("html-webpack-plugin"); // installed via npm
 const webpack = require("webpack"); // to access built-in plugins
 const path = require("path");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -58,6 +58,7 @@ const webpackConfig = {
     new WorkboxPlugin.GenerateSW({
       // these options encourage the ServiceWorkers to get in there fast
       // and not allow any straggling "old" SWs to hang around
+      maximumFileSizeToCacheInBytes: 2097152 * 10,
       clientsClaim: true,
       skipWaiting: true,
       runtimeCaching: [
