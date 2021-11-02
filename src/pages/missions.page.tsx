@@ -6,6 +6,7 @@ import {
   useFindAllMissionsForNavQuery,
 } from "../generated/apollo-hooks";
 import { PageWrapper } from "./page-wrapper.component";
+import { Emoji } from "../components/utilities/emoji.component";
 
 const MissionsPage: FunctionComponent = () => {
   const { data, loading, error } = useFindAllMissionsForNavQuery();
@@ -13,10 +14,7 @@ const MissionsPage: FunctionComponent = () => {
     console.error(error);
     return (
       <h1>
-        Failure to Launch{" "}
-        <span role="img" aria-label="moon">
-          🤕
-        </span>
+        Failure to Launch <Emoji name="moon" />
       </h1>
     );
   }

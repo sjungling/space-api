@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import { CREATE_MISSION_DETAIL_LINK } from "../../constants/routes";
 import { ImageComponent } from "../common/media.component";
 import { useApolloClient } from "@apollo/client";
+import { Emoji } from "../utilities/emoji.component";
 
 export const MissionVehiclesComponent: FunctionComponent<
   Pick<Mission, "launchVehicle" | "commandModule" | "lunarModule">
@@ -33,11 +34,8 @@ export const MissionVehiclesComponent: FunctionComponent<
     )}{" "}
     {lunarModule && (
       <span>
-        and landing on the{" "}
-        <span role="img" aria-label="moon">
-          🌖
-        </span>{" "}
-        with <strong>{lunarModule}</strong>
+        and landing on the <Emoji name="moon" /> with{" "}
+        <strong>{lunarModule}</strong>
       </span>
     )}
   </div>
@@ -58,7 +56,7 @@ export const MissionDetailsComponent: FunctionComponent<
   const missionDuration = duration
     ? convertSecondsToFormattedTime(duration)
     : null;
-  const [noteVisibility, setNoteVisibility] = useState(false);
+  const [noteVisibility, setNoteVisibility] = useState(true);
   const toggleNotes = () => {
     setNoteVisibility(!noteVisibility);
   };
@@ -108,7 +106,7 @@ export const MissionDetailsComponent: FunctionComponent<
         </aside>
         <div>
           <h3>Mission Crew</h3>
-          <div className="grid md:grid-cols-1 grid-cols-3">
+          <div className="grid md:grid-cols-1 grid-cols-3 ">
             {Array.isArray(astronauts) &&
               astronauts.map((astronaut) => (
                 <AstronautCardComponent key={astronaut.id} {...astronaut} />

@@ -5,15 +5,14 @@ import {
   Astronaut,
   AstronautDetailsFragment,
 } from "../../generated/apollo-hooks";
+import { Emoji } from "../utilities/emoji.component";
 
 export const AstronautCardComponent: FunctionComponent<AstronautDetailsFragment> =
   ({ id, firstName, lastName }) => {
     return (
       <div key={id} className="astronaut-card">
         <h4>
-          <span role="img" aria-label="Astronaut">
-            👨‍🚀
-          </span>
+          <Emoji name="astronaut" />
           {firstName} {lastName}
         </h4>
       </div>
