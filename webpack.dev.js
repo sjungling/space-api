@@ -7,13 +7,17 @@ module.exports = merge(common, {
   mode: "development",
   devtool: "inline-source-map",
   devServer: {
-    contentBase: path.join(__dirname, "public"),
-    compress: true,
-    port: 3000,
-    open: true,
-    hot: true,
-    historyApiFallback: {
-      index: "index.html",
+    static: {
+      directory: path.join(__dirname, "public"),
     },
+    client: {
+      progress: true,
+      overlay: false,
+    },
+    port: 3000,
+    open: {
+      app: "Google Chrome",
+    },
+    historyApiFallback: true,
   },
 });
