@@ -39,7 +39,7 @@
     "eslint": "<9.0.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-jsx-a11y": "6.6.0",
-    "eslint-plugin-react": "7.27.1",
+    "eslint-plugin-react": "7.31.1",
     "eslint-plugin-react-hooks": "4.3.0",
     "graphql": "16",
     "graphql-tools": "8.2.0",
