@@ -25,7 +25,7 @@ const MissionPage: FunctionComponent = () => {
   if (error || data?.mission.__typename === "NotFound") {
     return (
       <>
-        <p>{(data?.mission as NotFound)!.message}</p>
+        <p>{(data?.mission as NotFound)?.message}</p>
       </>
     );
   }
