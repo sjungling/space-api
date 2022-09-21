@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from "react";
 import Head from "next/head";
+import { Container } from "@mui/joy";
 
 export type PageWrapperProps = {
-  title?: string;
+  title?: string | null;
   description?: string;
 };
 export const PageWrapper: FunctionComponent<
@@ -10,12 +11,12 @@ export const PageWrapper: FunctionComponent<
 > = ({ title, description, children }) => {
   const BASE_TITLE = "SpaceAPI.dev";
   return (
-    <div className="container mx-auto px-4">
+    <Container>
       <Head>
         <title>{title ? `${title} - ${BASE_TITLE}` : BASE_TITLE}</title>
         <meta name="description" content={description} />
       </Head>
       {children}
-    </div>
+    </Container>
   );
 };

@@ -1,35 +1,29 @@
 import React, { FunctionComponent } from "react";
-import { MissionCardComponent } from "../components/missions/missions.component";
-import { LoadingComponent } from "../components/common";
+import { MissionCardComponent } from "../components/missions/mission-card.component";
 import {
   Mission,
   useFindAllMissionsForNavQuery,
 } from "../generated/apollo-hooks";
-import { PageWrapper } from "./page-wrapper.component";
-import { Emoji } from "../components/utilities/emoji.component";
+import { PageWrapper } from "../components/utilities/page-wrapper.component";
+import { Grid } from "@mui/joy";
+import { QueryResult } from "../components/utilities/query-results.component";
 
 const MissionsPage: FunctionComponent = () => {
   const { data, loading, error } = useFindAllMissionsForNavQuery();
-  if (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
-    return (
-      <h1>
-        Failure to Launch <Emoji name="moon" />
-      </h1>
-    );
-  }
-  if (loading) return <LoadingComponent />;
   return (
     <PageWrapper title="Manned Apollo Missions">
-      <div className="grid grid-cols-1  gap-1 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
-        {data?.missions
-          ?.filter((mission) => mission?.__typename === "Mission")
-          .filter(Boolean)
-          .map(({ id, mission }: Mission) => (
-            <MissionCardComponent key={id} id={id} mission={mission} />
-          ))}
-      </div>
+      <QueryResult data={data} loading={loading} error={error}>
+        <Grid container rowGap={2} columnGap={1} spacing={1}>
+          {data?.missions
+            ?.filter((mission) => mission?.__typename === "Mission")
+            .filter(Boolean)
+            .map(({ id, mission }: Mission) => (
+              <Grid key={id}>
+                <MissionCardComponent id={id} mission={mission} />
+              </Grid>
+            ))}
+        </Grid>
+      </QueryResult>
     </PageWrapper>
   );
 };

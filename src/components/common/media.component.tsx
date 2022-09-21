@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
-import Image from "next/image";
+import Image from "next/future/image";
+import { Box } from "@mui/joy";
 export type ImageProps = {
   width: number;
   height: number;
@@ -47,7 +48,7 @@ export const YouTubeVideoComponent: FunctionComponent<YouTubeProps> = ({
   id,
   url,
 }) => (
-  <div className="iframe-container" style={{ paddingTop: "75%" }}>
+  <Box className="iframe-container" sx={{ paddingTop: "75%" }}>
     <iframe
       title={`Video for ${id}`}
       className=""
@@ -56,5 +57,5 @@ export const YouTubeVideoComponent: FunctionComponent<YouTubeProps> = ({
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowFullScreen
     ></iframe>
-  </div>
+  </Box>
 );

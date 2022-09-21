@@ -1,8 +1,10 @@
 import React, { FunctionComponent } from "react";
 import Markdown from "markdown-to-jsx";
 import AboutContent from "./about.md";
-import { PageWrapper } from "./page-wrapper.component";
+import { PageWrapper } from "../components/utilities/page-wrapper.component";
 import Script from "next/script";
+import { Link } from "../components/common/link.component";
+import { Box, List, ListItem, Typography } from "@mui/joy";
 
 const DEFAULT_QUERY = `
 query ($missionId: Int!) {
@@ -61,19 +63,32 @@ const AboutPage: FunctionComponent = () => {
       <Markdown
         options={{
           overrides: {
+            ul: {
+              component: List,
+            },
             li: {
-              props: {
-                className: "list-disc list-inside",
-              },
+              component: ListItem,
+            },
+            p: {
+              component: Typography,
             },
             h1: {
+              component: Typography,
               props: {
-                className: "center",
+                component: "h1",
+                textAlign: "center",
               },
             },
             h2: {
+              component: Typography,
               props: {
-                className: "mt-2",
+                component: "h2",
+              },
+            },
+            a: {
+              component: Link,
+              props: {
+                external: true,
               },
             },
           },
@@ -82,16 +97,13 @@ const AboutPage: FunctionComponent = () => {
         {AboutContent}
       </Markdown>
 
-      <div
-        className="w-8/12 p-0 m-0 "
-        style={{
-          position: "relative",
-          minHeight: "50vh",
-          width: "90vw",
+      <Box
+        sx={{
           height: "60vh",
+          minHeight: "50vh",
         }}
         id="embedded-explorer"
-      ></div>
+      />
     </PageWrapper>
   );
 };

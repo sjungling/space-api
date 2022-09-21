@@ -1,16 +1,11 @@
 import React, { FunctionComponent } from "react";
-import {
-  NotFound,
-  useFindMissionByIdQuery,
-  useMissionImageGalleryQuery,
-} from "../../generated/apollo-hooks";
-import { LoadingComponent } from "../../components/common";
-import {
-  GalleryComponent,
-  MissionDetailsComponent,
-} from "../../components/missions/missions.component";
-import { PageWrapper } from "../page-wrapper.component";
+import { PageWrapper } from "../../components/utilities/page-wrapper.component";
 import { useRouter } from "next/router";
+import { Alert } from "@mui/joy";
+import { QueryResult } from "../../components/utilities/query-results.component";
+import { MissionGallery } from "../../components/missions/gallery.component";
+import { useFindMissionByIdQuery } from "../../generated/apollo-hooks";
+import { MissionDetailsComponent } from "../../components/missions/details.component";
 
 const MissionPage: FunctionComponent = () => {
   const router = useRouter();
@@ -21,52 +16,25 @@ const MissionPage: FunctionComponent = () => {
       missionId: Number(missionId),
     },
   });
-  if (loading) return <LoadingComponent />;
-  if (error || data?.mission.__typename === "NotFound") {
-    return (
-      <>
-        <p>{(data?.mission as NotFound)?.message}</p>
-      </>
-    );
-  }
-  if (data && data.mission.__typename === "Mission") {
-    const { mission } = data.mission;
-    return (
-      <PageWrapper
-        title={mission}
-        description={`Facts, images, and random information about ${mission}`}
-      >
-        <div className="ring-nasaRed ring-2 p-1 dark:bg-opacity-25 dark:bg-nasaBlue">
-          <MissionDetailsComponent {...data.mission} />
-          <MissionGallery id={Number(missionId)} />
-        </div>
+  return data?.mission.__typename === "NotFound" ? (
+    <QueryResult data={data} loading={loading} error={error}>
+      <PageWrapper title="Mission not found">
+        <Alert color="warning" variant="soft">
+          Unable to find mission
+        </Alert>
       </PageWrapper>
-    );
-  }
-  // Fallback
-  return null;
-};
-
-const MissionGallery: FunctionComponent<{ id: number }> = ({ id }) => {
-  const { data, loading, error } = useMissionImageGalleryQuery({
-    variables: {
-      missionId: Number(id),
-    },
-    returnPartialData: true,
-  });
-
-  if (!error) {
-    return (
-      <div>
-        <h3>Gallery</h3>
-        {loading && <GalleryComponent usePlaceholder={loading} />}
-        {data?.mission.__typename === "Mission" && (
-          <GalleryComponent images={data.mission.images} />
-        )}
-      </div>
-    );
-  }
-  return null;
+    </QueryResult>
+  ) : (
+    <QueryResult data={data} loading={loading} error={error}>
+      <PageWrapper
+        title={data?.mission.mission}
+        description={`Facts, images, and random information about ${data?.mission}`}
+      >
+        <MissionDetailsComponent missionDetails={data?.mission} />
+        <MissionGallery id={Number(missionId)} />
+      </PageWrapper>
+    </QueryResult>
+  );
 };
 
 export default MissionPage;
