@@ -11,6 +11,7 @@ import { Emoji } from "../components/utilities/emoji.component";
 const MissionsPage: FunctionComponent = () => {
   const { data, loading, error } = useFindAllMissionsForNavQuery();
   if (error) {
+    // eslint-disable-next-line no-console
     console.error(error);
     return (
       <h1>
