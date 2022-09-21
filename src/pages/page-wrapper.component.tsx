@@ -5,11 +5,9 @@ export type PageWrapperProps = {
   title?: string;
   description?: string;
 };
-export const PageWrapper: FunctionComponent<PageWrapperProps> = ({
-  title,
-  description,
-  children,
-}) => {
+export const PageWrapper: FunctionComponent<
+  React.PropsWithChildren<PageWrapperProps>
+> = ({ title, description, children }) => {
   const BASE_TITLE = "SpaceAPI.dev";
   return (
     <div className="container mx-auto px-4">

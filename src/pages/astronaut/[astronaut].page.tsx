@@ -19,7 +19,7 @@ const AstronautPage: FunctionComponent = () => {
 
   if (loading) return <LoadingComponent />;
   if (error || data?.astronaut.__typename === "NotFound") {
-    return <p>{(data?.astronaut as NotFound)!.message}</p>;
+    return <p>{(data?.astronaut as NotFound)?.message}</p>;
   }
   if (data?.astronaut.__typename === "Astronaut") {
     const { firstName, lastName } = data.astronaut;
