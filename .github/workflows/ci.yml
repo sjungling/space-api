@@ -16,5 +16,6 @@ jobs:
       - run: yarn install
       - name: Check all
         run: |
+          yarn generate
           yarn check:all
           yarn build

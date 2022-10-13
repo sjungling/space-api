@@ -1,6 +1,6 @@
 import { Typography } from "@mui/joy";
 import { FunctionComponent } from "react";
-import { Mission } from "../../generated/apollo-hooks";
+import { Mission } from "../../generated/gql/graphql";
 import { Emoji } from "../utilities/emoji.component";
 
 export const MissionVehiclesComponent: FunctionComponent<

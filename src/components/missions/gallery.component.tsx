@@ -1,15 +1,18 @@
+import { useQuery } from "@apollo/client";
 import { Box, Grid, Sheet } from "@mui/joy";
 import { FunctionComponent } from "react";
+import { FragmentType, useFragment } from "../../generated/gql";
 import {
-  ImageGalleryFragment,
-  useMissionImageGalleryQuery,
-} from "../../generated/apollo-hooks";
+  ImageGalleryFragmentDoc,
+  MissionImageGalleryDocument,
+} from "../../generated/gql/graphql";
+
 import { ImageComponent } from "../common";
 import { QueryResult } from "../utilities/query-results.component";
 import { SheetHeader } from "../utilities/styled.components";
 
 export const MissionGallery: FunctionComponent<{ id: number }> = ({ id }) => {
-  const { data, loading, error } = useMissionImageGalleryQuery({
+  const { data, loading, error } = useQuery(MissionImageGalleryDocument, {
     variables: {
       missionId: Number(id),
     },
@@ -33,10 +36,16 @@ export const MissionGallery: FunctionComponent<{ id: number }> = ({ id }) => {
   );
 };
 
-export const GalleryComponent: FunctionComponent<{
-  images?: ImageGalleryFragment[];
+type GalleryComponentProps = {
+  images?: FragmentType<typeof ImageGalleryFragmentDoc>[];
   usePlaceholder?: boolean;
-}> = ({ images, usePlaceholder }) => {
+};
+export const GalleryComponent: FunctionComponent<GalleryComponentProps> = (
+  props
+) => {
+  const { usePlaceholder } = props;
+  const images = useFragment(ImageGalleryFragmentDoc, props.images);
+
   const placeholderImages = [...Array(12)].map((_, idx) => (
     <Box
       key={idx}

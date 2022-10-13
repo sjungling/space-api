@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography, Link } from "@mui/joy";
 import { FunctionComponent } from "react";
 import { CREATE_MISSION_DETAIL_LINK } from "../../constants/routes";
-import { Mission } from "../../generated/apollo-hooks";
+import { Mission } from "../../generated/gql/graphql";
 
 export const MissionCardComponent: FunctionComponent<
   Pick<Mission, "mission" | "id">

@@ -1,10 +1,12 @@
 import { Sheet, Typography, Link, Grid, Button, List } from "@mui/joy";
 import { FunctionComponent, useState } from "react";
 import { CREATE_MISSION_DETAIL_LINK } from "../../constants/routes";
+import { useFragment, type FragmentType } from "../../generated/gql";
 import {
-  MissionDetailsFragment,
-  AstronautDetailsFragment,
-} from "../../generated/apollo-hooks";
+  Mission_AstronautsFragmentDoc,
+  MissionDetailsFragmentDoc,
+} from "../../generated/gql/graphql";
+
 import {
   convertSecondsToFormattedTime,
   formatISODate,
@@ -16,12 +18,19 @@ import { AstronautCardComponent } from "../astronauts/astronauts.component";
 import { MissionVehiclesComponent } from "./vehicles.component";
 
 export const MissionDetailsComponent: FunctionComponent<{
-  missionDetails: MissionDetailsFragment & {
-    astronauts: AstronautDetailsFragment[];
-  };
-}> = ({
-  missionDetails: {
-    astronauts,
+  missionDetails: FragmentType<typeof MissionDetailsFragmentDoc>;
+  astronautDetails?: FragmentType<typeof Mission_AstronautsFragmentDoc>;
+}> = (props) => {
+  const astronautDetails = useFragment(
+    Mission_AstronautsFragmentDoc,
+    props.astronautDetails
+  );
+
+  const missionDetails = useFragment(
+    MissionDetailsFragmentDoc,
+    props.missionDetails
+  );
+  const {
     id,
     mission,
     launchDate,
@@ -30,8 +39,8 @@ export const MissionDetailsComponent: FunctionComponent<{
     lunarModule,
     notes,
     duration,
-  },
-}) => {
+  } = missionDetails;
+
   const missionDuration = duration
     ? convertSecondsToFormattedTime(duration)
     : null;
@@ -84,12 +93,9 @@ export const MissionDetailsComponent: FunctionComponent<{
         <Grid xs={12} md={6}>
           <Typography component="h3">Mission Crew</Typography>
           <List>
-            {Array.isArray(astronauts) &&
-              astronauts.map((astronaut) => (
-                <AstronautCardComponent
-                  key={astronaut.id}
-                  astronaut={astronaut}
-                />
+            {Array.isArray(astronautDetails.astronauts) &&
+              astronautDetails.astronauts?.map((astronaut, idx) => (
+                <AstronautCardComponent key={idx} astronaut={astronaut} />
               ))}
           </List>
           <Typography component="h3">Notes</Typography>
