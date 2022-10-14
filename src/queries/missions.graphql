@@ -35,9 +35,7 @@ query findAllMissionsForNav {
 query findAllMissions {
   missions {
     ...MissionDetails
-    astronauts {
-      ...AstronautDetails
-    }
+    ...Mission_Astronauts
   }
 }
 

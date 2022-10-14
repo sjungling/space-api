@@ -2,11 +2,12 @@
   "scripts": {
     "dev": "next dev",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint --fix",
     "build": "next build",
+    "build:analyze": "ANALYZE=true next build",
     "prebuild": "yarn generate",
     "generate": "graphql-codegen --config codegen-client.yml",
-    "format": "prettier -w 'src/**/*.{ts,tsx,graphql,yml,json}' '{webpack,vercel,.eslintrc}*.{js,json}' '*.{md,yml}'",
+    "format": "prettier -l -w 'src/**/*.{ts,tsx,graphql,yml,json}' '{webpack,vercel,.eslintrc}*.{js,json}' '*.{md,yml}'",
     "prestart": "yarn build",
     "check:types": "tsc --noEmit",
     "check:all": "yarn format && yarn lint && yarn check:types"
@@ -56,5 +57,9 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "@next/bundle-analyzer": "12.3.1",
+    "sharp": "0.31.1"
   }
 }

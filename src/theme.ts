@@ -6,9 +6,6 @@ export const spaceDevTheme = extendTheme({
     JoySheet: {
       defaultProps: {
         sx: {
-          marginTop: 1,
-          paddingY: 1,
-          paddingX: 2,
           borderRadius: (theme) => theme.radius.xs,
         },
       },

@@ -15,15 +15,10 @@ export const AstronautCardComponent: FunctionComponent<{
   return (
     <ListItem key={astronaut.id}>
       <Chip
-        component="span"
+        component={Link}
         variant="outlined"
         startDecorator={<Emoji name="astronaut" />}
-        componentsProps={{
-          action: {
-            component: Link,
-            href: CREATE_ASTRONAUT_DETAIL_LINK(astronaut.id),
-          },
-        }}
+        href={CREATE_ASTRONAUT_DETAIL_LINK(astronaut.id)}
       >
         {astronaut.firstName} {astronaut.lastName}
       </Chip>

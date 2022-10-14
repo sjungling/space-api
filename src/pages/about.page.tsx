@@ -4,7 +4,7 @@ import AboutContent from "./about.md";
 import { PageWrapper } from "../components/utilities/page-wrapper.component";
 import Script from "next/script";
 import { Link } from "../components/common/link.component";
-import { Box, List, ListItem, Typography } from "@mui/joy";
+import { Box, List, ListItem, Typography, useColorScheme } from "@mui/joy";
 
 const DEFAULT_QUERY = `
 query ($missionId: Int!) {
@@ -26,19 +26,7 @@ const DEFAULT_VARIABLES = {
 };
 
 const AboutPage: FunctionComponent = () => {
-  // useEffect(() => {
-  //   if (window && document) {
-  //     const script = document.createElement("script");
-  //     const body = document.getElementsByTagName("body")[0];
-  //     script.src = "";
-  //     body.appendChild(script);
-  //     script.addEventListener("load", () => {
-  //       if (window.EmbeddedExplore) {
-
-  //       }
-  //     });
-  //   }
-  // }, []);
+  const { mode } = useColorScheme();
   return (
     <PageWrapper title="About this project">
       <Script
@@ -54,6 +42,10 @@ const AboutPage: FunctionComponent = () => {
             // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
             endpointUrl: `${process.env.NEXT_PUBLIC_GRAPHQL_URI}`,
             initialState: {
+              displayOptions: {
+                theme: mode,
+                docsPanelState: false,
+              },
               document: DEFAULT_QUERY,
               variables: DEFAULT_VARIABLES,
             },
@@ -99,8 +91,8 @@ const AboutPage: FunctionComponent = () => {
 
       <Box
         sx={{
-          height: "60vh",
-          minHeight: "50vh",
+          height: "80vh",
+          minHeight: "60vh",
         }}
         id="embedded-explorer"
       />

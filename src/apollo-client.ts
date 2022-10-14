@@ -9,9 +9,8 @@ const cache = new InMemoryCache({
 
 export const client = new ApolloClient({
   name: "space-api-web",
-
   uri: process.env.NEXT_PUBLIC_GRAPHQL_URI,
   cache,
-  // link,
   connectToDevTools: isDevelopment(),
+  assumeImmutableResults: true,
 });

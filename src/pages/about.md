@@ -16,4 +16,4 @@ The schema and data set may evolve over time but today offers:
 
 ## How can I get started?
 
-Explore the API with the GraphiQL below or set your GraphQL URI to https://graph.spaceapi.dev in your own project and start querying.
+Explore the API with the Apollo Explorer below or set your GraphQL URI to https://graph.spaceapi.dev in your own project and start querying.
