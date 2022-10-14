@@ -1,8 +1,10 @@
 import React, { FunctionComponent } from "react";
 import Markdown from "markdown-to-jsx";
 import AboutContent from "./about.md";
-import { PageWrapper } from "./page-wrapper.component";
+import { PageWrapper } from "../components/utilities/page-wrapper.component";
 import Script from "next/script";
+import { Link } from "../components/common/link.component";
+import { Box, List, ListItem, Typography, useColorScheme } from "@mui/joy";
 
 const DEFAULT_QUERY = `
 query ($missionId: Int!) {
@@ -24,19 +26,7 @@ const DEFAULT_VARIABLES = {
 };
 
 const AboutPage: FunctionComponent = () => {
-  // useEffect(() => {
-  //   if (window && document) {
-  //     const script = document.createElement("script");
-  //     const body = document.getElementsByTagName("body")[0];
-  //     script.src = "";
-  //     body.appendChild(script);
-  //     script.addEventListener("load", () => {
-  //       if (window.EmbeddedExplore) {
-
-  //       }
-  //     });
-  //   }
-  // }, []);
+  const { mode } = useColorScheme();
   return (
     <PageWrapper title="About this project">
       <Script
@@ -52,6 +42,10 @@ const AboutPage: FunctionComponent = () => {
             // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
             endpointUrl: `${process.env.NEXT_PUBLIC_GRAPHQL_URI}`,
             initialState: {
+              displayOptions: {
+                theme: mode,
+                docsPanelState: false,
+              },
               document: DEFAULT_QUERY,
               variables: DEFAULT_VARIABLES,
             },
@@ -61,19 +55,32 @@ const AboutPage: FunctionComponent = () => {
       <Markdown
         options={{
           overrides: {
+            ul: {
+              component: List,
+            },
             li: {
-              props: {
-                className: "list-disc list-inside",
-              },
+              component: ListItem,
+            },
+            p: {
+              component: Typography,
             },
             h1: {
+              component: Typography,
               props: {
-                className: "center",
+                component: "h1",
+                textAlign: "center",
               },
             },
             h2: {
+              component: Typography,
               props: {
-                className: "mt-2",
+                component: "h2",
+              },
+            },
+            a: {
+              component: Link,
+              props: {
+                external: true,
               },
             },
           },
@@ -82,16 +89,13 @@ const AboutPage: FunctionComponent = () => {
         {AboutContent}
       </Markdown>
 
-      <div
-        className="w-8/12 p-0 m-0 "
-        style={{
-          position: "relative",
-          minHeight: "50vh",
-          width: "90vw",
-          height: "60vh",
+      <Box
+        sx={{
+          height: "80vh",
+          minHeight: "60vh",
         }}
         id="embedded-explorer"
-      ></div>
+      />
     </PageWrapper>
   );
 };

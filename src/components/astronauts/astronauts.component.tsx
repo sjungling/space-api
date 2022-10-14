@@ -1,56 +1,39 @@
 import React, { FunctionComponent } from "react";
-import Link from "next/link";
+
+import { Chip, ListItem, Typography } from "@mui/joy";
+
 import { CREATE_ASTRONAUT_DETAIL_LINK } from "../../constants/routes";
-import {
-  Astronaut,
-  AstronautDetailsFragment,
-} from "../../generated/apollo-hooks";
+import { Link } from "../common/link.component";
 import { Emoji } from "../utilities/emoji.component";
+import { FragmentType, useFragment } from "../../generated/gql";
+import { AstronautDetailsFragmentDoc } from "../../generated/gql/graphql";
 
-export const AstronautCardComponent: FunctionComponent<
-  AstronautDetailsFragment
-> = ({ id, firstName, lastName }) => {
+export const AstronautCardComponent: FunctionComponent<{
+  astronaut: FragmentType<typeof AstronautDetailsFragmentDoc>;
+}> = (props) => {
+  const astronaut = useFragment(AstronautDetailsFragmentDoc, props.astronaut);
   return (
-    <div key={id} className="astronaut-card">
-      <h4>
-        <Emoji name="astronaut" />
-        {firstName} {lastName}
-      </h4>
-    </div>
-  );
-};
-export const AstronautsComponent: FunctionComponent<{ crew: Astronaut[] }> = ({
-  crew,
-}) => {
-  const astronauts = crew.map(({ id, firstName, lastName }) => (
-    <AstronautComponent
-      key={id}
-      id={id}
-      firstName={firstName}
-      lastName={lastName}
-    />
-  ));
-  return <ul className="mr-10">{astronauts}</ul>;
-};
-export const AstronautComponent: FunctionComponent<
-  Pick<Astronaut, "id" | "firstName" | "lastName">
-> = ({ id, firstName, lastName }) => {
-  return (
-    <li key={id}>
-      <Link href={CREATE_ASTRONAUT_DETAIL_LINK(id)}>
-        {lastName}, {firstName}
-      </Link>
-    </li>
+    <ListItem key={astronaut.id}>
+      <Chip
+        component={Link}
+        variant="outlined"
+        startDecorator={<Emoji name="astronaut" />}
+        href={CREATE_ASTRONAUT_DETAIL_LINK(astronaut.id)}
+      >
+        {astronaut.firstName} {astronaut.lastName}
+      </Chip>
+    </ListItem>
   );
 };
 
-export const AstronautDetail: FunctionComponent<AstronautDetailsFragment> = ({
-  firstName,
-  lastName,
-}) => (
-  <React.Fragment>
-    <h1>
-      {firstName} {lastName}
-    </h1>
-  </React.Fragment>
-);
+export const AstronautDetail: FunctionComponent<{
+  astronaut: FragmentType<typeof AstronautDetailsFragmentDoc>;
+}> = (props) => {
+  const astronaut = useFragment(AstronautDetailsFragmentDoc, props.astronaut);
+
+  return (
+    <Typography component="h1">
+      {astronaut.firstName} {astronaut.lastName}
+    </Typography>
+  );
+};

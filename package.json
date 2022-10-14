@@ -2,13 +2,15 @@
   "scripts": {
     "dev": "next dev",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint --fix",
     "build": "next build",
+    "build:analyze": "ANALYZE=true next build",
     "prebuild": "yarn generate",
     "generate": "graphql-codegen --config codegen-client.yml",
-    "format": "prettier -w 'src/**/*.{ts,tsx,graphql,yml,json}' '{webpack,postcss,tailwind,vercel,.eslintrc}*.{js,json}' '*.{md,yml}'",
+    "format": "prettier -l -w 'src/**/*.{ts,tsx,graphql,yml,json}' '{webpack,vercel,.eslintrc}*.{js,json}' '*.{md,yml}'",
     "prestart": "yarn build",
-    "check:all": "yarn format && yarn lint"
+    "check:types": "tsc --noEmit",
+    "check:all": "yarn format && yarn lint && yarn check:types"
   },
   "name": "space-api",
   "version": "1.0.0",
@@ -19,14 +21,18 @@
   ],
   "devDependencies": {
     "@apollo/client": "3.7.0",
+    "@emotion/react": "11.10.4",
+    "@emotion/styled": "11.10.4",
     "@graphql-codegen/add": "3.2.1",
     "@graphql-codegen/cli": "2.13.7",
+    "@graphql-codegen/client-preset": "1.0.6",
     "@graphql-codegen/fragment-matcher": "3.3.1",
     "@graphql-codegen/time": "3.2.1",
     "@graphql-codegen/typescript": "2.7.4",
     "@graphql-codegen/typescript-apollo-client-helpers": "2.2.4",
     "@graphql-codegen/typescript-operations": "2.5.4",
     "@graphql-codegen/typescript-react-apollo": "3.3.4",
+    "@mui/joy": "5.0.0-alpha.49",
     "@next/eslint-plugin-next": "12.3.1",
     "@types/react": "18.0.21",
     "@typescript-eslint/eslint-plugin": "5.40.0",
@@ -42,10 +48,10 @@
     "markdown-to-jsx": "7.1.7",
     "next": "12.3.1",
     "prettier": "2.7.1",
+    "raw-loader": "4.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "tailwindcss": "3.1.8",
-    "typescript": "4.8.4"
+    "typescript": "4.8.3"
   },
   "config": {
     "commitizen": {
@@ -53,6 +59,7 @@
     }
   },
   "dependencies": {
-    "raw-loader": "4.0.2"
+    "@next/bundle-analyzer": "12.3.1",
+    "sharp": "0.31.1"
   }
 }

@@ -1,35 +1,45 @@
 import React, { FunctionComponent } from "react";
 import { AstronautDetail } from "../../components/astronauts/astronauts.component";
-import { LoadingComponent } from "../../components/common";
-import {
-  NotFound,
-  useFindAstronautByIdQuery,
-} from "../../generated/apollo-hooks";
-import { PageWrapper } from "../page-wrapper.component";
+import { PageWrapper } from "../../components/utilities/page-wrapper.component";
 import { useRouter } from "next/router";
+import { QueryResult } from "../../components/utilities/query-results.component";
+import { Alert } from "@mui/joy";
+import {
+  AstronautDetailsFragmentDoc,
+  FindAstronautByIdDocument,
+} from "../../generated/gql/graphql";
+import { useQuery } from "@apollo/client";
+import { useFragment } from "../../generated/gql";
 
 const AstronautPage: FunctionComponent = () => {
   const { query } = useRouter();
 
-  const { data, loading, error } = useFindAstronautByIdQuery({
+  const { data, loading, error } = useQuery(FindAstronautByIdDocument, {
     variables: {
       astronaut_id: Number(query.astronaut),
     },
   });
 
-  if (loading) return <LoadingComponent />;
-  if (error || data?.astronaut.__typename === "NotFound") {
-    return <p>{(data?.astronaut as NotFound)?.message}</p>;
-  }
-  if (data?.astronaut.__typename === "Astronaut") {
-    const { firstName, lastName } = data.astronaut;
-    return (
-      <PageWrapper title={`${firstName} ${lastName}`}>
-        <AstronautDetail {...data.astronaut} />
+  const astronaut = useFragment(
+    AstronautDetailsFragmentDoc,
+    data?.astronaut.__typename === "Astronaut" ? data?.astronaut : null
+  );
+
+  return data?.astronaut?.__typename === "NotFound" ? (
+    <QueryResult data={data} loading={loading} error={error}>
+      <PageWrapper title="Not found">
+        <Alert color="warning" variant="soft">
+          Astronaut not found
+        </Alert>
       </PageWrapper>
-    );
-  }
-  return null;
+    </QueryResult>
+  ) : (
+    <QueryResult data={data} loading={loading} error={error}>
+      <PageWrapper title={`${astronaut?.firstName} ${astronaut?.lastName}`}>
+        <AstronautDetail astronaut={data?.astronaut} />
+      </PageWrapper>
+    </QueryResult>
+  );
 };
 
 export default AstronautPage;

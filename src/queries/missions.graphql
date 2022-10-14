@@ -35,9 +35,13 @@ query findAllMissionsForNav {
 query findAllMissions {
   missions {
     ...MissionDetails
-    astronauts {
-      ...AstronautDetails
-    }
+    ...Mission_Astronauts
+  }
+}
+
+fragment Mission_Astronauts on Mission {
+  astronauts {
+    ...AstronautDetails
   }
 }
 
@@ -45,9 +49,7 @@ query findMissionById($missionId: Int!) {
   mission(id: $missionId) {
     ... on Mission {
       ...MissionDetails
-      astronauts {
-        ...AstronautDetails
-      }
+      ...Mission_Astronauts
     }
     ... on NotFound {
       message
