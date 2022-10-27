@@ -38,7 +38,7 @@
     "eslint-config-next": "13.0.0",
     "eslint-plugin-jsx-a11y": "6.6.1",
     "graphql": "16.6.0",
-    "graphql-tools": "8.3.6",
+    "graphql-tools": "8.3.7",
     "markdown-to-jsx": "7.1.7",
     "next": "13.0.0",
     "prettier": "2.7.1",
