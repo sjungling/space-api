@@ -36,7 +36,7 @@
     "cz-conventional-changelog": "3.3.0",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.1",
-    "eslint-plugin-jsx-a11y": "6.7.0",
+    "eslint-plugin-jsx-a11y": "6.7.1",
     "graphql": "16.6.0",
     "graphql-tools": "8.3.14",
     "markdown-to-jsx": "7.1.8",
