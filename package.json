@@ -18,7 +18,7 @@
     "last 1 Chrome version"
   ],
   "devDependencies": {
-    "@apollo/client": "3.7.4",
+    "@apollo/client": "3.7.6",
     "@graphql-codegen/add": "3.2.3",
     "@graphql-codegen/cli": "2.16.3",
     "@graphql-codegen/fragment-matcher": "3.3.3",
