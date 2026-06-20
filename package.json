@@ -39,7 +39,7 @@
     "eslint-plugin-jsx-a11y": "6.7.1",
     "graphql": "16.6.0",
     "graphql-tools": "8.3.15",
-    "markdown-to-jsx": "7.1.8",
+    "markdown-to-jsx": "7.4.0",
     "next": "13.1.2",
     "prettier": "2.8.3",
     "react": "18.2.0",
